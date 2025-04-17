@@ -1,0 +1,410 @@
+/* General Section Styles */
+.section-t8 {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.title-a {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.title-a::after {
+    content: "";
+    width: 50px;
+    height: 3px;
+    background-color: #1b7b2c;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+}
+
+.title-link a {
+    color: #1b7b2c;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.title-link a:hover {
+    color: #155e22;
+}
+
+/* Dịch vụ của chúng tôi */
+.section-services .card-box-c {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-services .card-box-c:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.section-services .card-box-ico {
+    font-size: 40px;
+    color: #1b7b2c;
+    margin-right: 15px;
+}
+
+.section-services .title-c {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.section-services .content-c {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Bài đăng mới nhất */
+.section-property .card-box-a {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.section-property .card-box-a:hover {
+    transform: translateY(-5px);
+}
+
+.section-property .img-box-a img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.section-property .card-box-a:hover .img-box-a img {
+    transform: scale(1.05);
+}
+
+.section-property .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.section-property .card-box-a:hover .card-overlay {
+    opacity: 1;
+}
+
+.section-property .card-overlay-a-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    color: white;
+}
+
+.section-property .card-title-a a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.section-property .card-title-a small {
+    font-size: 14px;
+    color: #ddd;
+}
+
+.section-property .price-a {
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #1b7b2c;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.section-property .card-body-a a {
+    color: #1b7b2c;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.section-property .card-body-a a:hover {
+    color: #155e22;
+}
+
+.section-property .card-info-title {
+    font-size: 14px;
+    color: #ddd;
+}
+
+.section-property .card-info span {
+    font-size: 15px;
+    color: white;
+}
+
+/* Người cho thuê */
+.section-agents .card-box-d {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.section-agents .card-box-d:hover {
+    transform: translateY(-5px);
+}
+
+.section-agents .img-d {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.section-agents .card-box-d:hover .img-d {
+    transform: scale(1.05);
+}
+
+.section-agents .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.section-agents .card-box-d:hover .card-overlay {
+    opacity: 1;
+}
+
+.section-agents .card-header-d {
+    text-align: center;
+    padding: 20px;
+}
+
+.section-agents .title-d a {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.section-agents .card-body-d {
+    padding: 20px;
+    color: white;
+}
+
+.section-agents .content-d {
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.section-agents .info-agents p {
+    font-size: 14px;
+}
+
+.section-agents .socials-footer a {
+    color: white;
+    font-size: 20px;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.section-agents .socials-footer a:hover {
+    color: #1b7b2c;
+}
+
+/* Tiếp tục từ phần trước */
+
+/* Đánh giá về chúng tôi (tiếp tục) */
+.section-testimonials .testimonials-box {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: transform 0.3s ease;
+}
+
+.section-testimonials .testimonials-box:hover {
+    transform: translateY(-5px);
+}
+
+.section-testimonials .testimonial-img img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.section-testimonials .testimonial-img img:hover {
+    transform: scale(1.02);
+}
+
+.section-testimonials .testimonial-ico {
+    font-size: 40px;
+    color: #1b7b2c;
+    margin-bottom: 15px;
+}
+
+.section-testimonials .testimonial-text {
+    font-size: 16px;
+    color: #555;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.section-testimonials .testimonial-author-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.section-testimonials .testimonial-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1b7b2c;
+}
+
+.section-testimonials .testimonial-author {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Swiper Styles */
+.section-testimonials .swiper-wrapper {
+    padding-bottom: 40px;
+}
+
+.section-testimonials .swiper-slide {
+    display: flex;
+    justify-content: center;
+}
+
+.section-testimonials .swiper-pagination-bullet {
+    background-color: #1b7b2c;
+    opacity: 0.5;
+    width: 10px;
+    height: 10px;
+}
+
+.section-testimonials .swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+.section-testimonials .swiper-button-next,
+.section-testimonials .swiper-button-prev {
+    color: #1b7b2c;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.section-testimonials .swiper-button-next:hover,
+.section-testimonials .swiper-button-prev:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .section-t8 {
+        padding: 50px 0;
+    }
+
+    .title-a {
+        font-size: 24px;
+    }
+
+    .section-services .card-box-c {
+        margin-bottom: 20px;
+    }
+
+    .section-property .card-box-a,
+    .section-agents .card-box-d {
+        margin-bottom: 20px;
+    }
+
+    .section-property .img-box-a img,
+    .section-agents .img-d {
+        height: 300px;
+    }
+
+    .section-testimonials .testimonial-img img {
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title-a {
+        font-size: 22px;
+    }
+
+    .section-property .card-title-a a {
+        font-size: 18px;
+    }
+
+    .section-property .price-a {
+        font-size: 16px;
+    }
+
+    .section-agents .title-d a {
+        font-size: 18px;
+    }
+
+    .section-testimonials .testimonials-box {
+        padding: 20px;
+    }
+
+    .section-testimonials .testimonial-img img {
+        height: 200px;
+    }
+
+    .section-testimonials .testimonial-text {
+        font-size: 14px;
+    }
+
+    .section-testimonials .testimonial-author {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-property .img-box-a img,
+    .section-agents .img-d {
+        height: 250px;
+    }
+
+    .section-testimonials .testimonials-box {
+        text-align: center;
+    }
+
+    .section-testimonials .testimonial-img img {
+        height: 150px;
+        margin-bottom: 20px;
+    }
+
+    .section-testimonials .testimonial-author-box {
+        justify-content: center;
+    }
+}

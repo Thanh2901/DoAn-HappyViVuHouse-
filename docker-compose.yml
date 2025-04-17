@@ -1,0 +1,28 @@
+services:
+  rental-house-db:
+    image: postgres:15
+    container_name: rental-house-db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: rental-house
+    ports:
+      - "2345:5432"
+    volumes:
+      - rental-house-data:/var/lib/postgresql/data
+
+  activemq:
+    image: rmohr/activemq
+    container_name: activemq
+    ports:
+      # broker administrator
+      - "8161:8161"
+      # internal communication pro and con
+      - "61616:61616"
+    volumes:
+      - activemq-data:/opt/activemq/data
+
+volumes:
+  rental-house-data:
+  activemq-data:

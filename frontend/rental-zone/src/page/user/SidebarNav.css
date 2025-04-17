@@ -1,0 +1,119 @@
+/* Sidebar Nav */
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-header {
+    text-align: center;
+}
+
+.sidebar-item {
+    margin: 5px 0;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #555;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 0;
+    transition: all 0.3s ease;
+}
+
+.sidebar-link i {
+    font-size: 18px;
+    color: #777;
+}
+
+.sidebar-link span {
+    margin-left: 10px;
+}
+
+/* Định nghĩa kiểu cho sidebar-link */
+.sidebar-nav .sidebar-link {
+    color: #ffffff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hiệu ứng hover cho sidebar-link */
+.sidebar-nav .sidebar-link:hover {
+    background-color: #495057;
+    color: #ffffff !important;
+    text-decoration: none;
+}
+
+/* Hiệu ứng hover cho icon */
+.sidebar-nav .sidebar-link:hover i {
+    color: #1b7b2c !important;
+}
+
+/* Kiểu cho các mục active (trừ mục đầu tiên) */
+.sidebar-nav .sidebar-item .sidebar-link.active {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+/* Loại bỏ màu nền xanh cho mục đầu tiên khi active */
+.sidebar-nav .sidebar-item:first-child .sidebar-link.active {
+    background-color: transparent !important;
+    color: #ffffff !important;
+}
+
+/* Đảm bảo màu icon cho mục đầu tiên khi active */
+.sidebar-nav .sidebar-item:first-child .sidebar-link.active i {
+    color: #777 !important;
+}
+
+/* Đảm bảo hover hoạt động cho mục đầu tiên khi active */
+.sidebar-nav .sidebar-item:first-child .sidebar-link.active:hover {
+    background-color: #495057 !important;
+    color: #ffffff !important;
+}
+
+/* Đảm bảo màu icon khi hover cho mục đầu tiên khi active */
+.sidebar-nav .sidebar-item:first-child .sidebar-link.active:hover i {
+    color: #1b7b2c !important;
+}
+
+/* Đảm bảo hover hoạt động khi active (cho các mục khác) */
+.sidebar-nav .sidebar-link.active:hover {
+    background-color: #495057 !important;
+    color: #ffffff !important;
+}
+
+/* Đảm bảo màu icon khi active và hover */
+.sidebar-nav .sidebar-link.active:hover i {
+    color: #1b7b2c !important;
+}
+
+/* Kiểu mặc định cho active */
+.sidebar-link.active {
+    background-color: #1b7b2c;
+    color: white;
+    font-weight: 500;
+}
+
+.sidebar-link.active i {
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar-header {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+
+    .sidebar-link {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .sidebar-link i {
+        font-size: 16px;
+    }
+}

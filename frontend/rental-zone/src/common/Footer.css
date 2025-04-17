@@ -1,0 +1,133 @@
+/* Section Footer */
+.section-footer {
+    background-color: #f8f9fa;
+    padding: 60px 0 40px;
+    border-top: 1px solid #e9ecef;
+}
+
+.w-title-a.text-brand {
+    color: #1b7b2c;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.w-text-a {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.w-footer-a .contact-item {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.w-footer-a .contact-item i {
+    color: #1b7b2c;
+    font-size: 18px;
+}
+
+.w-footer-a .contact-item span {
+    color: #777;
+    margin-right: 5px;
+}
+
+/* List items */
+.item-list-a {
+    margin-bottom: 12px;
+}
+
+.item-list-a i {
+    color: #1b7b2c;
+    font-size: 14px;
+}
+
+.item-list-a a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.item-list-a a:hover {
+    color: #1b7b2c;
+}
+
+/* Footer bottom */
+footer {
+    background-color: #343a40;
+    padding: 30px 0;
+    color: #adb5bd;
+}
+
+.nav-footer .list-inline-item a {
+    color: #adb5bd;
+    text-decoration: none;
+    padding: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-footer .list-inline-item a:hover {
+    color: #1b7b2c;
+}
+
+.socials-a .list-inline-item {
+    margin: 0 10px;
+}
+
+.socials-a .social-link {
+    color: #adb5bd;
+    font-size: 20px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.socials-a .social-link:hover {
+    color: #1b7b2c;
+    transform: scale(1.2);
+}
+
+.copyright-footer {
+    margin: 20px 0;
+}
+
+.copyright {
+    color: #adb5bd;
+    font-size: 14px;
+}
+
+.copyright .text-brand {
+    color: #1b7b2c;
+    font-weight: 500;
+}
+
+.credits {
+    font-size: 13px;
+}
+
+.credits a {
+    color: #1b7b2c;
+    text-decoration: none;
+}
+
+.credits a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-footer .col-md-4 {
+        margin-bottom: 40px;
+    }
+
+    .nav-footer .list-inline-item {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .socials-a .list-inline-item {
+        margin: 5px 15px;
+    }
+}

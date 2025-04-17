@@ -1,0 +1,242 @@
+/* Container chính của profile */
+.profile-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 5px !important; /* Đảm bảo không bị ghi đè bởi p-0 */
+}
+
+/* Avatar và tên người dùng */
+.profile-avatar {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 10px !important; /* Đảm bảo không bị ghi đè bởi dropdown-toggle */
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    overflow: hidden; /* Giới hạn phần tử con khi scale */
+}
+
+.profile-avatar:hover {
+    background-color: #f1f1f1;
+}
+
+.profile-container .avatar-img {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1b7b2c !important; /* Đảm bảo không bị ghi đè bởi img { border-style: none } */
+    transition: transform 0.2s ease !important; /* Đảm bảo không bị ghi đè bởi .profile-avatar img */
+}
+
+.profile-container .avatar-img:hover {
+    transform: scale(1.05); /* Giảm scale để tránh tràn ra ngoài */
+}
+
+.text-avatar {
+    width: 40px !important;
+    height: 40px !important;
+    background-color: #1b7b2c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.text-avatar:hover {
+    background-color: #28a745 !important;
+}
+
+.user-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-left: 8px;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    margin-top: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    min-width: 150px;
+    overflow: hidden; /* Đảm bảo nội dung không tràn ra ngoài */
+}
+
+.dropdown-item {
+    font-size: 14px;
+    padding: 8px 15px;
+    color: #333; /* Màu mặc định cho tất cả dropdown-item */
+    transition: background-color 0.2s ease, color 0.2s ease; /* Đảm bảo transition mượt mà */
+    width: 100%; /* Đảm bảo dropdown-item không vượt quá kích thước của dropdown-menu */
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+}
+
+.dropdown-item:hover {
+    background-color: #1b7b2c; /* Hiệu ứng hover cho các mục khác (như Profile) */
+    color: white;
+}
+
+/* Định dạng riêng cho "Log Out" */
+.text-danger {
+    color: #333 !important; /* Màu mặc định là đen, giống các mục khác */
+}
+
+.text-danger:hover {
+    background-color: transparent; /* Bỏ hiệu ứng background khi hover */
+    color: #dc3545 !important; /* Chuyển sang màu đỏ khi hover */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 10px;
+    }
+
+    .dropdown-menu {
+        width: 100%;
+        left: 0 !important;
+    }
+
+    .profile-avatar span {
+        display: none; /* Ẩn tên trên màn hình nhỏ */
+    }
+
+    .auth-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* Đảm bảo navbar không bị ảnh hưởng */
+.navbar {
+    background-color: #fff;
+}
+
+.navbar-brand .color-b {
+    color: #1b7b2c;
+}
+
+.nav-link {
+    color: #333;
+}
+
+.nav-link.active {
+    color: #1b7b2c;
+    font-weight: bold;
+}
+
+.fs-14 {
+    font-size: 25px !important;
+    font-weight: lighter !important;
+}
+
+button.dropdown-item:hover {
+    color: red!important;
+}
+
+/* Tùy chỉnh Swiper Pagination */
+.intro-swiper .swiper-pagination-bullet {
+    background-color: #28a745; /* Màu xanh lá cây cho bullet chưa active */
+    opacity: 0.5;
+}
+
+.intro-swiper .swiper-pagination-bullet-active {
+    background-color: #28a745; /* Màu xanh lá cây cho bullet active */
+    opacity: 1;
+}
+
+/* Tùy chỉnh Swiper Navigation Arrows */
+.intro-swiper .swiper-button-next,
+.intro-swiper .swiper-button-prev {
+    color: #28a745; /* Màu xanh lá cây cho nút điều hướng */
+}
+
+/* Đảm bảo nút điều hướng nổi bật khi hover (tùy chọn) */
+.intro-swiper .swiper-button-next:hover,
+.intro-swiper .swiper-button-prev:hover {
+    color: #218838; /* Màu xanh đậm hơn khi hover */
+}
+
+/* Profile Avatar Styling */
+.user-profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #3b7ddd;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-right: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 3px solid #ffffff;
+    overflow: hidden; /* This ensures the image doesn't spill outside the rounded borders */
+    position: relative; /* For proper positioning of the image */
+}
+
+/* Style for the avatar image */
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This makes sure the image covers the entire space nicely */
+    object-position: center; /* Centers the image */
+}
+
+/* Ensure proper layout for the profile header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h2 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.profile-email {
+    color: #6c757d;
+    margin: 0;
+}
+
+/* Ensure the profile content has proper spacing */
+.profile-main {
+    padding: 20px;
+}
+
+.profile-card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    border: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .user-profile-avatar {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}
+
+/* Fix for fs-14 class if not defined elsewhere */
+.fs-14 {
+    font-size: 1.75rem;
+}
