@@ -671,18 +671,18 @@ function App() {
           <Route
             path="/rentaler/contract-management"
             element={
-              <ProtectedRoute
+              // <ProtectedRoute
+              //   authenticated={authenticated}
+              //   role={role}
+              //   allowedRole="ROLE_RENTALER"
+              // >
+              <ContractManagement
                 authenticated={authenticated}
+                currentUser={currentUser}
                 role={role}
-                allowedRole="ROLE_RENTALER"
-              >
-                <ContractManagement
-                  authenticated={authenticated}
-                  currentUser={currentUser}
-                  role={role}
-                  onLogout={handleLogout}
-                />
-              </ProtectedRoute>
+                onLogout={handleLogout}
+              />
+              // </ProtectedRoute>
             }
           />
           <Route

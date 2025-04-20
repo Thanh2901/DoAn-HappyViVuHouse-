@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import SidebarNav from "./SidebarNav";
-import Nav from "./Nav";
-import {
-  disableRoom,
-  getAllContractOfRentaler,
-} from "../../services/fetch/ApiUtils";
-import Pagination from "./Pagnation";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
+import "../../assets/css/Sort.css";
+import { getAllContractOfRentaler } from "../../services/fetch/ApiUtils";
+import Nav from "./Nav";
+import Pagination from "./Pagnation";
+import SidebarNav from "./SidebarNav";
 
 function ContractManagement(props) {
   const { authenticated, role, currentUser, location, onLogout } = props;
@@ -18,7 +16,9 @@ function ContractManagement(props) {
   const [itemsPerPage] = useState(10);
   const [totalItems, setTotalItems] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [filteredStatus, setFilteredStatus] = useState("all");
+  const [sortField, setSortField] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
   // Fetch data from the API
 
   const fetchData = () => {
@@ -68,17 +68,32 @@ function ContractManagement(props) {
     return remainingMonths;
   };
 
-  if (!props.authenticated) {
-    return (
-      <Navigate
-        to={{
-          pathname: "/login-rentaler",
-          state: { from: location },
-        }}
-      />
-    );
-  }
+  // if (!props.authenticated) {
+  //   return (
+  //     <Navigate
+  //       to={{
+  //         pathname: "/login-rentaler",
+  //         state: { from: location },
+  //       }}
+  //     />
+  //   );
+  // }
 
+  const handleSort = (sortField, sortOrder) => {
+    setSortField(sortField);
+    setSortOrder(sortOrder);
+  };
+
+  const handleFilter = (status) => {
+    // Close the filter dropdown
+    const filterDropdown = document.querySelector(".filter-dropdown");
+    filterDropdown.classList.remove("show");
+    setFilteredStatus(status);
+  };
+  const handleFilterClick = () => {
+    const filterDropdown = document.querySelector(".filter-dropdown");
+    filterDropdown.classList.toggle("show");
+  };
   return (
     <>
       <div className="wrapper">
@@ -197,7 +212,7 @@ function ContractManagement(props) {
                             aria-controls="datatables-buttons"
                             rowspan="1"
                             colspan="1"
-                            style={{ width: "166px" }}
+                            style={{ width: "150px" }}
                           >
                             Hợp Đồng
                           </th>
@@ -207,9 +222,19 @@ function ContractManagement(props) {
                             aria-controls="datatables-buttons"
                             rowspan="1"
                             colspan="1"
-                            style={{ width: "75px" }}
+                            style={{ width: "140px" }}
+                            onClick={() =>
+                              handleSort(
+                                "price",
+                                sortOrder === "asc" ? "desc" : "asc"
+                              )
+                            }
                           >
                             Giá phòng
+                            <span className="sort-icon">
+                              <i className="fas fa-sort-up"></i>
+                              <i className="fas fa-sort-down"></i>
+                            </span>
                           </th>
                           <th
                             className="sorting"
@@ -217,9 +242,19 @@ function ContractManagement(props) {
                             aria-controls="datatables-buttons"
                             rowspan="1"
                             colspan="1"
-                            style={{ width: "75px" }}
+                            style={{ width: "120px" }}
+                            onClick={() =>
+                              handleSort(
+                                "additional-fee",
+                                sortOrder === "asc" ? "desc" : "asc"
+                              )
+                            }
                           >
-                            Phụ phí{" "}
+                            Phụ phí
+                            <span className="sort-icon">
+                              <i className="fas fa-sort-up"></i>
+                              <i className="fas fa-sort-down"></i>
+                            </span>
                           </th>
                           <th
                             className="sorting"
@@ -227,9 +262,19 @@ function ContractManagement(props) {
                             aria-controls="datatables-buttons"
                             rowspan="1"
                             colspan="1"
-                            style={{ width: "100px" }}
+                            style={{ width: "140px" }}
+                            onClick={() =>
+                              handleSort(
+                                "time",
+                                sortOrder === "asc" ? "desc" : "asc"
+                              )
+                            }
                           >
                             Thời hạn
+                            <span className="sort-icon">
+                              <i className="fas fa-sort-up"></i>
+                              <i className="fas fa-sort-down"></i>
+                            </span>
                           </th>
                           <th
                             className="sorting"
@@ -237,10 +282,65 @@ function ContractManagement(props) {
                             aria-controls="datatables-buttons"
                             rowspan="1"
                             colspan="1"
-                            style={{ width: "142px" }}
+                            style={{ width: "150px" }}
                           >
                             Trạng Thái
+                            {/* <span className="filter-icon"> */}
+                            <i
+                              className="fas fa-filter filter-icon ml-1"
+                              onClick={() => handleFilterClick()}
+                            ></i>
+                            {/* </span> */}
+                            <div className="filter-dropdown">
+                              <ul className="dropdown-menu">
+                                <li>
+                                  <button
+                                    className={`dropdown-item  ${
+                                      filteredStatus === "all" ? "active" : ""
+                                    }`}
+                                    onClick={() => handleFilter("all")}
+                                  >
+                                    Tất cả
+                                  </button>
+                                </li>
+                                <li>
+                                  <button
+                                    className={`dropdown-item  ${
+                                      filteredStatus === "checked_out"
+                                        ? "active"
+                                        : ""
+                                    }`}
+                                    onClick={() => handleFilter("checked_out")}
+                                  >
+                                    Đã trả phòng
+                                  </button>
+                                </li>
+                                <li>
+                                  <button
+                                    className={`dropdown-item  ${
+                                      filteredStatus === "hired" ? "active" : ""
+                                    }`}
+                                    onClick={() => handleFilter("hired")}
+                                  >
+                                    Đã thuê
+                                  </button>
+                                </li>
+                                <li>
+                                  <button
+                                    className={`dropdown-item  ${
+                                      filteredStatus === "room_rent"
+                                        ? "active"
+                                        : ""
+                                    }`}
+                                    onClick={() => handleFilter("room_rent")}
+                                  >
+                                    Chưa thuê
+                                  </button>
+                                </li>
+                              </ul>
+                            </div>
                           </th>
+
                           <th
                             className="sorting"
                             tabindex="0"

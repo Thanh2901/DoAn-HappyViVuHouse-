@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../assets/css/app.css";
+import "../../assets/css/Sort.css";
 import {
   approveRoomOfAdmin,
   getAllRoomApprovingOfAdmin,
@@ -23,8 +24,8 @@ const DashboardAdmin = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [totalItems, setTotalItems] = useState(0);
-  const [filter, setFilter] = useState("");
-  const [direction, setDirection] = useState("");
+  const [sortField, setSortField] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
 
   const [number, setNumber] = useState({
     numberOfAccount: "",
@@ -35,15 +36,15 @@ const DashboardAdmin = (props) => {
 
   useEffect(() => {
     fetchData();
-  }, [currentPage, filter, direction]);
+  }, [currentPage, sortField, sortOrder]);
 
   const fetchData = () => {
     getAllRoomApprovingOfAdmin(
       currentPage,
       itemsPerPage,
       false,
-      filter,
-      direction
+      sortField,
+      sortOrder
     )
       .then((response) => {
         setTableData(response.content);
@@ -124,8 +125,8 @@ const DashboardAdmin = (props) => {
   }
 
   const handleSort = (filter, direction) => {
-    setFilter(filter);
-    setDirection(direction);
+    setSortField(filter);
+    setSortOrder(direction);
   };
   return (
     <div className="wrapper">
@@ -380,16 +381,17 @@ const DashboardAdmin = (props) => {
                               rowSpan="1"
                               colSpan="1"
                               style={{ width: "75px" }}
-                              onClick={() => handleSort("price", direction==='asc'?'desc':'asc')}
+                              onClick={() =>
+                                handleSort(
+                                  "price",
+                                  sortOrder === "asc" ? "desc" : "asc"
+                                )
+                              }
                             >
                               Giá
                               <span className="sort-icon">
-                                <i
-                                  className="fas fa-sort-up"
-                                ></i>
-                                <i
-                                  className="fas fa-sort-down"
-                                ></i>
+                                <i className="fas fa-sort-up"></i>
+                                <i className="fas fa-sort-down"></i>
                               </span>
                             </th>
                             <th
@@ -399,16 +401,17 @@ const DashboardAdmin = (props) => {
                               rowSpan="1"
                               colSpan="1"
                               style={{ width: "142px" }}
-                              onClick={() => handleSort("status", direction==='asc'?'desc':'asc')}
+                              onClick={() =>
+                                handleSort(
+                                  "status",
+                                  sortOrder === "asc" ? "desc" : "asc"
+                                )
+                              }
                             >
                               Trạng Thái
                               <span className="sort-icon">
-                                <i
-                                  className="fas fa-sort-up"
-                                ></i>
-                                <i
-                                  className="fas fa-sort-down"
-                                ></i>
+                                <i className="fas fa-sort-up"></i>
+                                <i className="fas fa-sort-down"></i>
                               </span>
                             </th>
                             <th

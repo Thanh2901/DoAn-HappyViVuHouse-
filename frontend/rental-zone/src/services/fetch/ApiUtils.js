@@ -233,13 +233,19 @@ export function getUserOfChat() {
 }
 
 // ADMIN
-export function getAllRoomOfAdmin(pageNo, pageSize, name, filter, direction) {
+export function getAllRoomOfAdmin(
+  pageNo,
+  pageSize,
+  name,
+  sortField,
+  sortOrder
+) {
   if (!localStorage.getItem(ACCESS_TOKEN)) {
     return Promise.reject("No access token set.");
   }
   let url = "";
-  if (filter && direction) {
-    url = "/blog/order/" + filter + "-" + direction;
+  if (sortField && sortOrder) {
+    url = "/blog/order/" + sortField + "-" + sortOrder;
   } else {
     url = "/room/all";
   }
@@ -256,15 +262,15 @@ export function getAllRoomApprovingOfAdmin(
   pageNo,
   pageSize,
   approve,
-  filter,
-  direction
+  sortField,
+  sortOrder
 ) {
   if (!localStorage.getItem(ACCESS_TOKEN)) {
     return Promise.reject("No access token set.");
   }
   let url = "";
-  if (filter && direction) {
-    url = "/blog/order/" + filter + "-" + direction;
+  if (sortField && sortOrder) {
+    url = "/blog/order/" + sortField + "-" + sortOrder;
   } else {
     url = "/room/all";
   }
@@ -412,20 +418,36 @@ export function getAllRoomOfRentaler(pageNo, pageSize, name) {
   });
 }
 
-export function getAllContractOfRentaler(pageNo, pageSize, keyword) {
+export function getAllContractOfRentaler(
+  pageNo,
+  pageSize,
+  keyword,
+  sortField,
+  sortOrder,
+  filteredStatus
+) {
   if (!localStorage.getItem(ACCESS_TOKEN)) {
     return Promise.reject("No access token set.");
   }
+  //filter/status/hired/title-asc
+  let url = "/contract/filter";
+  if (filteredStatus && filteredStatus !== "all") {
+    url += "/status/" + filteredStatus;
+  }
 
+  if (sortField && sortOrder) {
+    url += "/" + sortField + "-" + sortOrder;
+  } else {
+    url += "/title-asc";
+  }
+
+  if (!(filteredStatus && sortField && sortOrder)) {
+    url = "/contract";
+  }
   return request({
     url:
       API_BASE_URL +
-      "/contract?pageNo=" +
-      pageNo +
-      "&pageSize=" +
-      pageSize +
-      "&keyword=" +
-      keyword,
+      `${url}?pageNo=${pageNo}&pageSize=${pageSize}&keyword=${keyword}`,
     method: "GET",
   });
 }
@@ -475,38 +497,51 @@ export function getAllBlogStore(pageNo, pageSize) {
   });
 }
 
-export function getAllMaintenceOfRentaler(pageNo, pageSize, name) {
+export function getAllMaintenceOfRentaler(
+  pageNo,
+  pageSize,
+  name,
+  sortField,
+  sortOrder
+) {
   if (!localStorage.getItem(ACCESS_TOKEN)) {
     return Promise.reject("No access token set.");
+  }
+
+  let url = "/maintenance";
+
+  if (sortField && sortOrder) {
+    url += "/filter/" + sortField + "-" + sortOrder;
   }
 
   return request({
     url:
       API_BASE_URL +
-      "/maintenance?pageNo=" +
-      pageNo +
-      "&pageSize=" +
-      pageSize +
-      "&keyword=" +
-      name,
+      `${url}?pageNo=${pageNo}&pageSize=${pageSize}&keyword=${name}`,
     method: "GET",
   });
 }
 
-export function getAllRequireOfRentaler(pageNo, pageSize, name) {
+export function getAllRequireOfRentaler(
+  pageNo,
+  pageSize,
+  name,
+  sortOrder,
+  sortColumn
+) {
   if (!localStorage.getItem(ACCESS_TOKEN)) {
     return Promise.reject("No access token set.");
   }
 
+  let url = "/request";
+
+  if (sortColumn && sortOrder) {
+    url += "/filter/" + sortColumn + "-" + sortOrder;
+  }
   return request({
     url:
       API_BASE_URL +
-      "/request?pageNo=" +
-      pageNo +
-      "&pageSize=" +
-      pageSize +
-      "&keyword=" +
-      name,
+      `${url}?pageNo=${pageNo}&pageSize=${pageSize}&keyword=${name}`,
     method: "GET",
   });
 }
