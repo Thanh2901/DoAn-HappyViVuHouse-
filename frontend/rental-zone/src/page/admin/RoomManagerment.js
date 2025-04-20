@@ -22,13 +22,14 @@ function RoomManagement(props) {
 
   const [roomId, setRoomId] = useState(4);
   const [showModal, setShowModal] = useState(false);
-  const [tableData, setTableData] = useState([{}, {}]);
+  const [tableData, setTableData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3);
   const [totalItems, setTotalItems] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("");
-  const [direction, setDirection] = useState("");
+  const [direction, setDirection] = useState("asc");
+  console.log('filter admin',filter,'direction',direction)
   // Fetch data from the API
   useEffect(() => {
     fetchData();
@@ -37,7 +38,7 @@ function RoomManagement(props) {
   const fetchData = () => {
     getAllRoomOfAdmin(currentPage, itemsPerPage, searchQuery, filter, direction)
       .then((response) => {
-        setTableData([response.content, {}, {}]);
+        setTableData(response.content);
         setTotalItems(response.page.totalElements);
         console.log("response: ", response);
       })
@@ -97,6 +98,8 @@ function RoomManagement(props) {
   console.log("ROOMID", roomId);
 
   const handleSort = (column, direction) => {
+    console.log('filter admin',column,'direction',direction)
+
     setFilter(column);
     setDirection(direction);
   };
@@ -223,16 +226,15 @@ function RoomManagement(props) {
                             rowSpan="1"
                             colSpan="1"
                             style={{ width: "75px" }}
+                            onClick={() => handleSort("price", direction==='asc'?'desc':'asc')}
                           >
                             Giá
                             <span className="sort-icon">
                               <i
                                 className="fas fa-sort-up"
-                                onClick={() => handleSort("price", "asc")}
                               ></i>
                               <i
                                 className="fas fa-sort-down"
-                                onClick={() => handleSort("price", "desc")}
                               ></i>
                             </span>
                           </th>
@@ -243,16 +245,15 @@ function RoomManagement(props) {
                             rowSpan="1"
                             colSpan="1"
                             style={{ width: "142px" }}
+                            onClick={() => handleSort("status", direction==='asc'?'desc':'asc')}
                           >
                             Trạng Thái
                             <span className="sort-icon">
                               <i
                                 className="fas fa-sort-up"
-                                onClick={() => handleSort("status", "asc")}
                               ></i>
                               <i
                                 className="fas fa-sort-down"
-                                onClick={() => handleSort("status", "desc")}
                               ></i>
                             </span>
                           </th>

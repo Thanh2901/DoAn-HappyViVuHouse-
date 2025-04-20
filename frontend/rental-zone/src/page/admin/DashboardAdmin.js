@@ -380,16 +380,15 @@ const DashboardAdmin = (props) => {
                               rowSpan="1"
                               colSpan="1"
                               style={{ width: "75px" }}
+                              onClick={() => handleSort("price", direction==='asc'?'desc':'asc')}
                             >
                               Giá
                               <span className="sort-icon">
                                 <i
                                   className="fas fa-sort-up"
-                                  onClick={() => handleSort("price", "asc")}
                                 ></i>
                                 <i
                                   className="fas fa-sort-down"
-                                  onClick={() => handleSort("price", "desc")}
                                 ></i>
                               </span>
                             </th>
@@ -400,16 +399,15 @@ const DashboardAdmin = (props) => {
                               rowSpan="1"
                               colSpan="1"
                               style={{ width: "142px" }}
+                              onClick={() => handleSort("status", direction==='asc'?'desc':'asc')}
                             >
                               Trạng Thái
                               <span className="sort-icon">
                                 <i
                                   className="fas fa-sort-up"
-                                  onClick={() => handleSort("status", "asc")}
                                 ></i>
                                 <i
                                   className="fas fa-sort-down"
-                                  onClick={() => handleSort("status", "desc")}
                                 ></i>
                               </span>
                             </th>
