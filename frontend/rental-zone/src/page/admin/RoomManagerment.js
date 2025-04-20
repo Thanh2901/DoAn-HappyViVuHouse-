@@ -2,7 +2,7 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   approveRoomOfAdmin,
@@ -101,13 +101,16 @@ function RoomManagement(props) {
     setDirection(direction);
   };
 
-  // if (!authenticated) {
-  //     return <Navigate
-  //         to={{
-  //             pathname: "/login-admin",
-  //             state: { from: location }
-  //         }} />;
-  // }
+  if (!authenticated) {
+    return (
+      <Navigate
+        to={{
+          pathname: "/login-admin",
+          state: { from: location },
+        }}
+      />
+    );
+  }
 
   return (
     <>

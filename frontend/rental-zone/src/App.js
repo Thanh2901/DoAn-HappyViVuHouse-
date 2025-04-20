@@ -413,14 +413,18 @@ function App() {
           <Route
             path="/admin/room-management"
             element={
-              // <ProtectedRoute authenticated={authenticated} role={role} allowedRole="ROLE_ADMIN">
-              <RoomManagementAdmin
+              <ProtectedRoute
                 authenticated={authenticated}
-                currentUser={currentUser}
                 role={role}
-                onLogout={handleLogout}
-              />
-              // </ProtectedRoute>
+                allowedRole="ROLE_ADMIN"
+              >
+                <RoomManagementAdmin
+                  authenticated={authenticated}
+                  currentUser={currentUser}
+                  role={role}
+                  onLogout={handleLogout}
+                />
+              </ProtectedRoute>
             }
           />
           <Route
