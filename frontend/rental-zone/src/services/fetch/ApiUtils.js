@@ -252,20 +252,26 @@ export function getAllRoomOfAdmin(pageNo, pageSize, name, filter, direction) {
   });
 }
 
-export function getAllRoomApprovingOfAdmin(pageNo, pageSize, approve) {
+export function getAllRoomApprovingOfAdmin(
+  pageNo,
+  pageSize,
+  approve,
+  filter,
+  direction
+) {
   if (!localStorage.getItem(ACCESS_TOKEN)) {
     return Promise.reject("No access token set.");
   }
-
+  let url = "";
+  if (filter && direction) {
+    url = "/blog/order/" + filter + "-" + direction;
+  } else {
+    url = "/room/all";
+  }
   return request({
     url:
       API_BASE_URL +
-      "/room/all?pageNo=" +
-      pageNo +
-      "&pageSize=" +
-      pageSize +
-      "&approve=" +
-      approve,
+      `${url}?pageNo=${pageNo}&pageSize=${pageSize}&approve=${approve}`,
     method: "GET",
   });
 }
