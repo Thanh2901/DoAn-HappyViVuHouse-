@@ -68,16 +68,16 @@ function ContractManagement(props) {
     return remainingMonths;
   };
 
-  // if (!props.authenticated) {
-  //   return (
-  //     <Navigate
-  //       to={{
-  //         pathname: "/login-rentaler",
-  //         state: { from: location },
-  //       }}
-  //     />
-  //   );
-  // }
+  if (!props.authenticated) {
+    return (
+      <Navigate
+        to={{
+          pathname: "/login-rentaler",
+          state: { from: location },
+        }}
+      />
+    );
+  }
 
   const handleSort = (sortField, sortOrder) => {
     setSortField(sortField);
