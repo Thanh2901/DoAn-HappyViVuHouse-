@@ -1,18 +1,22 @@
-// UserContext.js
-import { createContext, useContext, useState } from "react";
-import '../style.css'
+// src/context/UserContext.js
+import React, { createContext, useContext, useState } from "react";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [messages, setMessages] = useState([]);
 
   return (
-    <UserContext.Provider value={{ selectedUser, setSelectedUser }}>
-      {children}
-    </UserContext.Provider>
+      <UserContext.Provider value={{ messages, setMessages }}>
+        {children}
+      </UserContext.Provider>
   );
 };
 
-
-export const useUserContext = () => useContext(UserContext);
+export const useUserContext = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useUserContext must be used within a UserProvider");
+  }
+  return context;
+};
