@@ -18,7 +18,7 @@ function ContractManagement(props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredStatus, setFilteredStatus] = useState("all");
   const [sortField, setSortField] = useState("");
-  const [sortOrder, setSortOrder] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
   // Fetch data from the API
 
   const fetchData = () => {
@@ -36,7 +36,7 @@ function ContractManagement(props) {
   };
   useEffect(() => {
     fetchData();
-  }, [currentPage, searchQuery, sortField, sortOrder, filteredStatus]);
+  }, [currentPage, searchQuery]);
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
   };

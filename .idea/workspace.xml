@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1a16e0f2-828e-4899-bc35-7a2d60ddf86f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ElectricAndWaterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ElectricAndWaterServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/MessageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/MessageChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/MessageChat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/MessageChatRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/MessageChatRepository.java" afterDir="false" />
@@ -72,6 +73,10 @@
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.BackendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/rentanler-management&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;22&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/doan&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;22&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,

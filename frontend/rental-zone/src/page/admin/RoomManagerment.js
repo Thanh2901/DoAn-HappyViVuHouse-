@@ -4,6 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "../../assets/css/Sort.css";
 import {
   approveRoomOfAdmin,
   getAllRoomOfAdmin,
@@ -12,7 +13,6 @@ import {
 import ModalRoomDetails from "./modal/ModalRoomDetail";
 import Nav from "./Nav";
 import Pagination from "./Pagnation";
-import "./Room.css";
 import SidebarNav from "./SidebarNav";
 
 function RoomManagement(props) {
@@ -27,16 +27,22 @@ function RoomManagement(props) {
   const [itemsPerPage] = useState(3);
   const [totalItems, setTotalItems] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filter, setFilter] = useState("");
-  const [direction, setDirection] = useState("asc");
-  console.log('filter admin',filter,'direction',direction)
+  const [sortField, setSortField] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
+  console.log("filter admin", sortField, "direction", sortOrder);
   // Fetch data from the API
   useEffect(() => {
     fetchData();
-  }, [currentPage, searchQuery, filter, direction]);
+  }, [currentPage, searchQuery, sortField, sortOrder]);
 
   const fetchData = () => {
-    getAllRoomOfAdmin(currentPage, itemsPerPage, searchQuery, filter, direction)
+    getAllRoomOfAdmin(
+      currentPage,
+      itemsPerPage,
+      searchQuery,
+      sortField,
+      sortOrder
+    )
       .then((response) => {
         setTableData(response.content);
         setTotalItems(response.page.totalElements);
@@ -97,11 +103,9 @@ function RoomManagement(props) {
 
   console.log("ROOMID", roomId);
 
-  const handleSort = (column, direction) => {
-    console.log('filter admin',column,'direction',direction)
-
-    setFilter(column);
-    setDirection(direction);
+  const handleSort = (sortField, sortOrder) => {
+    setSortField(sortField);
+    setSortOrder(sortOrder);
   };
 
   if (!authenticated) {
@@ -226,16 +230,17 @@ function RoomManagement(props) {
                             rowSpan="1"
                             colSpan="1"
                             style={{ width: "75px" }}
-                            onClick={() => handleSort("price", direction==='asc'?'desc':'asc')}
+                            onClick={() =>
+                              handleSort(
+                                "price",
+                                sortOrder === "asc" ? "desc" : "asc"
+                              )
+                            }
                           >
                             Giá
                             <span className="sort-icon">
-                              <i
-                                className="fas fa-sort-up"
-                              ></i>
-                              <i
-                                className="fas fa-sort-down"
-                              ></i>
+                              <i className="fas fa-sort-up"></i>
+                              <i className="fas fa-sort-down"></i>
                             </span>
                           </th>
                           <th
@@ -245,16 +250,17 @@ function RoomManagement(props) {
                             rowSpan="1"
                             colSpan="1"
                             style={{ width: "142px" }}
-                            onClick={() => handleSort("status", direction==='asc'?'desc':'asc')}
+                            onClick={() =>
+                              handleSort(
+                                "status",
+                                sortOrder === "asc" ? "desc" : "asc"
+                              )
+                            }
                           >
                             Trạng Thái
                             <span className="sort-icon">
-                              <i
-                                className="fas fa-sort-up"
-                              ></i>
-                              <i
-                                className="fas fa-sort-down"
-                              ></i>
+                              <i className="fas fa-sort-up"></i>
+                              <i className="fas fa-sort-down"></i>
                             </span>
                           </th>
                           <th
