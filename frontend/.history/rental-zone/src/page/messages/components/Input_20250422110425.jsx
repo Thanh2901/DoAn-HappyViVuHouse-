@@ -55,22 +55,13 @@ const Input = ({ sendMessage, disabled }) => {
         </div>
         
         {showEmojiPicker && (
-          <div 
-            className="position-absolute"
-            style={{ 
-              bottom: '100%',
-              left: '0',
-              marginBottom: '5px',
-              zIndex: 1000,
-              boxShadow: '0 0 10px rgba(0,0,0,0.1)'
-            }}
-          >
+          <div className="position-absolute bottom-100 start-0" style={{ zIndex: 1000 }}>
             <EmojiPicker
               onEmojiClick={onEmojiClick}
               searchDisabled
               skinTonesDisabled
               width={300}
-              height={320}
+              height={400}
             />
           </div>
         )}
@@ -81,7 +72,6 @@ const Input = ({ sendMessage, disabled }) => {
           padding: 10px;
           background: #f5f5f5;
           border-top: 1px solid #e1e1e1;
-          position: relative;
         }
         
         form {
@@ -99,9 +89,6 @@ const Input = ({ sendMessage, disabled }) => {
           height: 40px;
           outline: none;
           font-family: inherit;
-          overflow: hidden; /* Add this to remove scroll */
-          line-height: 20px; /* Add this to control line height */
-          max-height: 40px; /* Add this to prevent expanding */
         }
         
         textarea:focus {

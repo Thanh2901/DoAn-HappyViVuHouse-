@@ -11,14 +11,11 @@ const Chat = () => {
   const [systemNotifications, setSystemNotifications] = useState([]);
   const [stompClient, setStompClient] = useState(null);
   const [connected, setConnected] = useState(false);
-  const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const messagesEndRef = useRef(null);
   const stompClientRef = useRef(null);
   const subscriptionRef = useRef(null);
-  const historySubscriptionRef = useRef(null);
   const hasJoinedRef = useRef(false);
   const connectionAttemptRef = useRef(0);
-  const historyLoadedRef = useRef(false);
 
   const scrollToBottom = () => {
     const chatBody = document.querySelector('.card-body');
@@ -36,12 +33,9 @@ const Chat = () => {
     getCurrentUser()
       .then((user) => {
         setCurrentUser(user);
-        // Fetch chat history right after getting user info
-        fetchChatHistory();
       })
       .catch((error) => {
         console.error('Failed to fetch current user:', error);
-        setIsLoadingHistory(false);
       });
 
     // Clean up khi component unmount
@@ -50,86 +44,8 @@ const Chat = () => {
     };
   }, []);
 
-  const fetchChatHistory = async () => {
-    try {
-      setIsLoadingHistory(true);
-      // Create a temporary connection to fetch history
-      const tempSocket = new SockJS('http:localhost:8080/ws');
-      const tempClient = Stomp.over(tempSocket);
-      tempClient.debug = () => {}; // Disable debug logs
-      
-      await new Promise((resolve, reject) => {
-        tempClient.connect({}, () => {
-          console.log('Connected to server for history fetch');
-          
-          // Subscribe to receive history
-          historySubscriptionRef.current = tempClient.subscribe('/topic/public/history', (message) => {
-            const historyMessages = JSON.parse(message.body);
-            console.log('Received chat history:', historyMessages);
-            
-            // Process history messages
-            const processedMessages = historyMessages.map(msg => ({
-              ...msg,
-              clientId: `hist_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-              isOwnMessage: msg.createdBy === currentUser?.name
-            }));
-            
-            // Separate messages and system notifications
-            const chatMessages = processedMessages.filter(msg => msg.type === 'CHAT');
-            const notifications = processedMessages.filter(msg => msg.type === 'JOIN' || msg.type === 'LEAVE');
-            
-            setMessages(chatMessages);
-            setSystemNotifications(notifications);
-            historyLoadedRef.current = true;
-            
-            // Cleanup
-            if (historySubscriptionRef.current) {
-              historySubscriptionRef.current.unsubscribe();
-              historySubscriptionRef.current = null;
-            }
-            tempClient.disconnect();
-            resolve();
-          });
-          
-          // Send request for history
-          tempClient.send('/app/chat/public/history', {}, JSON.stringify({}));
-          
-          // Set timeout for history fetch
-          setTimeout(() => {
-            try {
-              if (historySubscriptionRef.current) {
-                historySubscriptionRef.current.unsubscribe();
-                historySubscriptionRef.current = null;
-              }
-              tempClient.disconnect();
-              reject(new Error('History fetch timed out'));
-            } catch (err) {
-              console.error('Error during history timeout cleanup:', err);
-            }
-          }, 5000);
-        }, (error) => {
-          console.error('Failed to connect for history:', error);
-          reject(error);
-        });
-      });
-    } catch (err) {
-      console.error('Error fetching chat history:', err);
-    } finally {
-      setIsLoadingHistory(false);
-    }
-  };
-
   const cleanupConnection = () => {
     // Dọn dẹp kết nối cũ
-    if (historySubscriptionRef.current) {
-      try {
-        historySubscriptionRef.current.unsubscribe();
-      } catch (err) {
-        console.error("Error unsubscribing from history:", err);
-      }
-      historySubscriptionRef.current = null;
-    }
-    
     if (subscriptionRef.current) {
       try {
         subscriptionRef.current.unsubscribe();
@@ -299,9 +215,9 @@ const Chat = () => {
   const SystemNotification = ({ notification }) => {
     const getNotificationText = () => {
       if (notification.type === 'JOIN') {
-        return `${notification.userName || notification.createdBy} đã tham gia cuộc trò chuyện`;
+        return `${notification.userName} đã tham gia cuộc trò chuyện`;
       } else if (notification.type === 'LEAVE') {
-        return `${notification.userName || notification.createdBy} đã rời khỏi cuộc trò chuyện`;
+        return `${notification.userName} đã rời khỏi cuộc trò chuyện`;
       }
       return '';
     };
@@ -328,26 +244,14 @@ const Chat = () => {
       <div className="card flex-grow-1">
         <div className="card-header d-flex justify-content-between align-items-center py-2">
           <h4 className="mb-0 fw-bold">PUBLIC CHAT ROOM</h4>
-          <div className="d-flex align-items-center">
-            {isLoadingHistory && (
-              <span className="badge bg-info me-2">Loading history...</span>
-            )}
-            <span className={`badge fs-6 ${connected ? 'bg-success' : 'bg-danger'}`}>
-              {connected ? 'Connected' : 'Disconnected'}
-            </span>
-          </div>
+          <span className={`badge fs-6 ${connected ? 'bg-success' : 'bg-danger'}`}>
+            {connected ? 'Connected' : 'Disconnected'}
+          </span>
         </div>
 
         <div className="card-body p-2 overflow-auto" style={{ height: 'calc(70vh - 100px)' }}>
           <div className="d-flex flex-column">
-            {isLoadingHistory ? (
-              <div className="text-center my-3">
-                <div className="spinner-border text-primary" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-                <p className="mt-2">Loading chat history...</p>
-              </div>
-            ) : combinedMessages.length === 0 ? (
+            {combinedMessages.length === 0 ? (
               <div className="text-center text-muted my-2">
                 <small className="mb-0">Chưa có tin nhắn nào. Hãy bắt đầu cuộc trò chuyện!</small>
               </div>

@@ -81,7 +81,7 @@ const Input = ({ sendMessage, disabled }) => {
           padding: 10px;
           background: #f5f5f5;
           border-top: 1px solid #e1e1e1;
-          position: relative;
+          position: relative; /* Add this */
         }
         
         form {
@@ -99,9 +99,6 @@ const Input = ({ sendMessage, disabled }) => {
           height: 40px;
           outline: none;
           font-family: inherit;
-          overflow: hidden; /* Add this to remove scroll */
-          line-height: 20px; /* Add this to control line height */
-          max-height: 40px; /* Add this to prevent expanding */
         }
         
         textarea:focus {

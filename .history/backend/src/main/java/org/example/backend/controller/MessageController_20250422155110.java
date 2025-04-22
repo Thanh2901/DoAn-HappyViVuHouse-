@@ -7,7 +7,6 @@ import org.example.backend.security.UserPrincipal;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
@@ -68,7 +67,9 @@ public class MessageController {
     @MessageMapping("/chat/public/history")
     @SendTo("/topic/public/history")
     public List<MessageChat> loadHistory() {
+        // Get the most recent messages (limit to 50 for performance)
         List<MessageChat> history = messageChatRepository.findTop50ByMessageIsNullOrderBySentAtDesc();
+        // Reverse the list to get chronological order
         Collections.reverse(history);
         return history;
     }

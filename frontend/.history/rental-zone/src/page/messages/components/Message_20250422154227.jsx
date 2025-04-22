@@ -7,7 +7,7 @@ const Message = ({ message, isOwnMessage, username }) => {
     >
       <div
         className={`p-2 rounded-3 ${
-          isOwnMessage ? 'bg-primary text-white' : 'bg-info-subtle'
+          isOwnMessage ? 'bg-primary text-white' : 'bg-'
         }`}
         style={{
           maxWidth: '70%',
