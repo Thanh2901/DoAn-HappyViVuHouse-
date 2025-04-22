@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../assets/css/Sort.css";
 import { getAllContractOfRentaler } from "../../services/fetch/ApiUtils";
