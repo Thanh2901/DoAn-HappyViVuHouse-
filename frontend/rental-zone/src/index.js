@@ -9,13 +9,10 @@ import './assets/vendor/bootstrap-icons/bootstrap-icons.css';
 import './assets/vendor/swiper/swiper-bundle.min.css';
 import './assets/css/bootstrap.min.css';
 import './assets/css/style.css';
-import { WebSocketProvider } from "../src/page/messages/context/WebSocketContext";
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-    <WebSocketProvider>
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>
-    </WebSocketProvider>
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
 );

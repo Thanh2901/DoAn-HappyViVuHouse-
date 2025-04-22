@@ -225,7 +225,7 @@ public class RoomController {
     }
 
     // room order by price desc
-    @GetMapping("/filter/order/price-max")
+    @GetMapping("/filter/order/price-desc")
     public ResponseEntity<?> getRoomRentalerByPriceDesc(@RequestParam(required = false) String title,
                                                         @RequestParam Integer pageNo,
                                                         @RequestParam Integer pageSize) {
@@ -233,7 +233,7 @@ public class RoomController {
     }
 
     // room order by price asc
-    @GetMapping("/filter/order/price-min")
+    @GetMapping("/filter/order/price-asc")
     public ResponseEntity<?> getRoomRentalerByPriceAsc(@RequestParam(required = false) String title,
                                                         @RequestParam Integer pageNo,
                                                         @RequestParam Integer pageSize) {

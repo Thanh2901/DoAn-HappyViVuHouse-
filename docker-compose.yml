@@ -19,7 +19,10 @@ services:
       # broker administrator
       - "8161:8161"
       # internal communication pro and con
+      # OpenWire
       - "61616:61616"
+      # STOMP
+      - "61613:61613"
     volumes:
       - activemq-data:/opt/activemq/data
 
