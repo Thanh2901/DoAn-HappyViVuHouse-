@@ -1,4 +1,3 @@
-import { configConsumerProps } from "antd/es/config-provider";
 import { ACCESS_TOKEN, API_BASE_URL } from "../../constants/Connect";
 
 const request = (options) => {
@@ -432,21 +431,19 @@ export function getAllContractOfRentaler(
   }
   //filter/status/hired/title-asc
   let url = "/contract/filter";
-  console.log("filteredStatus", filteredStatus);
   if (filteredStatus && filteredStatus !== "all") {
     url += "/status/" + filteredStatus;
   }
-  console.log("sortField, sortOder", sortField, sortOrder)
+
   if (sortField && sortOrder) {
     url += "/" + sortField + "-" + sortOrder;
   } else {
     url += "/title-asc";
   }
 
-  if (filteredStatus === "all" && !sortField && !sortOrder) {
+  if (!(filteredStatus && sortField && sortOrder)) {
     url = "/contract";
   }
-  console.log("filteredStatus: ", filteredStatus)
   return request({
     url:
       API_BASE_URL +

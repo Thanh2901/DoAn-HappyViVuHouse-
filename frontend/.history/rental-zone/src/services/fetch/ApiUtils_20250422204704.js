@@ -433,7 +433,7 @@ export function getAllContractOfRentaler(
   //filter/status/hired/title-asc
   let url = "/contract/filter";
   console.log("filteredStatus", filteredStatus);
-  if (filteredStatus && filteredStatus !== "all") {
+  if (filteredStatus && filteredStatus == "all") {
     url += "/status/" + filteredStatus;
   }
   console.log("sortField, sortOder", sortField, sortOrder)
@@ -443,10 +443,9 @@ export function getAllContractOfRentaler(
     url += "/title-asc";
   }
 
-  if (filteredStatus === "all" && !sortField && !sortOrder) {
+  if (!(filteredStatus && sortField && sortOrder)) {
     url = "/contract";
   }
-  console.log("filteredStatus: ", filteredStatus)
   return request({
     url:
       API_BASE_URL +
