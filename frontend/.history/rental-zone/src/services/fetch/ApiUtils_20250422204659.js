@@ -443,10 +443,9 @@ export function getAllContractOfRentaler(
     url += "/title-asc";
   }
 
-  if (filteredStatus === "all" && !sortField && !sortOrder) {
+  if (!(filteredStatus && sortField && sortOrder)) {
     url = "/contract";
   }
-  console.log("filteredStatus: ", filteredStatus)
   return request({
     url:
       API_BASE_URL +
