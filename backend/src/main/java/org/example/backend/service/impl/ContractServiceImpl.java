@@ -469,4 +469,148 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         // Convert to ContractResponse
         return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
     }
+
+    @Override
+    public Page<ContractResponse> getContractHiredByTimeAsc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").ascending());
+
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.HIRED.equals(contract.getRoom().getStatus()))
+                .collect(Collectors.toList());
+
+        // Create a new Page with filtered results
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        // Convert to ContractResponse
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractHiredByTimeDesc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").descending());
+
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.HIRED.equals(contract.getRoom().getStatus()))
+                .collect(Collectors.toList());
+
+        // Create a new Page with filtered results
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        // Convert to ContractResponse
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractRoomRentByTimeAsc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").ascending());
+
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.ROOM_RENT.equals(contract.getRoom().getStatus()))
+                .collect(Collectors.toList());
+
+        // Create a new Page with filtered results
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        // Convert to ContractResponse
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractRoomRentByTimeDesc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").descending());
+
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.ROOM_RENT.equals(contract.getRoom().getStatus()))
+                .collect(Collectors.toList());
+
+        // Create a new Page with filtered results
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        // Convert to ContractResponse
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractCheckedOutByTimeAsc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").ascending());
+
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.CHECKED_OUT.equals(contract.getRoom().getStatus()))
+                .collect(Collectors.toList());
+
+        // Create a new Page with filtered results
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        // Convert to ContractResponse
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractCheckedOutByTimeDesc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").descending());
+
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.CHECKED_OUT.equals(contract.getRoom().getStatus()))
+                .collect(Collectors.toList());
+
+        // Create a new Page with filtered results
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        // Convert to ContractResponse
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
 }

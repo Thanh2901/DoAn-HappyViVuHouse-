@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1a16e0f2-828e-4899-bc35-7a2d60ddf86f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ContractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ContractController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/MaintenanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/MaintenanceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ContractService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ContractService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/MaintenanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/MaintenanceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ContractServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ContractServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/MaintenanceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/MaintenanceServiceImpl.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="package-info" />
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feat/rentanler-management" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Thanh2901&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Thanh2901/DoAn-HappyViVuHouse-.git&quot;,
+    &quot;accountId&quot;: &quot;3d135db4-3a25-4cb2-ac24-1e220c7770ab&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2urC2BDE1nTKqVSzO0bYwf6aPKB" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;HTTP Request.generated-requests | #1.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.backend [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.backend [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.backend [install].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.BackendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;22&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/DACNTT/Source Code/Happi ViVu House&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Intelliji\\IntelliJ IDEA 2024.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;D:/DACNTT/Source Code/Happi ViVu House/backend/src/main/resources/db/migration/V1__create_role_table.sql&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House\backend\src\main\resources\db\migration" />
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\src" />
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\public" />
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend" />
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House\backend\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone" />
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\src\page\admin\context" />
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\src\services\axios" />
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\src\assets" />
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\public\assets\css" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.example.backend.enums" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.BackendApplication">
+    <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" requestIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.backend.BackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests | #1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1a16e0f2-828e-4899-bc35-7a2d60ddf86f" name="Changes" comment="" />
+      <created>1742997098438</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742997098438</updated>
+      <workItem from="1742997099554" duration="10267000" />
+      <workItem from="1743044547608" duration="48000" />
+      <workItem from="1743060701432" duration="146000" />
+      <workItem from="1743077558114" duration="12949000" />
+      <workItem from="1743100015017" duration="457000" />
+      <workItem from="1743131146935" duration="4986000" />
+      <workItem from="1743172845528" duration="9597000" />
+      <workItem from="1743217637494" duration="4442000" />
+      <workItem from="1743222156861" duration="7119000" />
+      <workItem from="1743310558196" duration="2693000" />
+      <workItem from="1743336857193" duration="13297000" />
+      <workItem from="1743401745389" duration="11305000" />
+      <workItem from="1743417378125" duration="15000" />
+      <workItem from="1743423527370" duration="12907000" />
+      <workItem from="1743477358789" duration="1496000" />
+      <workItem from="1743488158371" duration="2035000" />
+      <workItem from="1743519558404" duration="2861000" />
+      <workItem from="1743562581162" duration="16798000" />
+      <workItem from="1743603043874" duration="10169000" />
+      <workItem from="1743649829462" duration="22974000" />
+      <workItem from="1743691038374" duration="4714000" />
+      <workItem from="1743738304420" duration="23746000" />
+      <workItem from="1743815372024" duration="22193000" />
+      <workItem from="1743950334852" duration="11151000" />
+      <workItem from="1743996001147" duration="17520000" />
+      <workItem from="1744079127828" duration="14480000" />
+      <workItem from="1744122650345" duration="11519000" />
+      <workItem from="1744167906574" duration="15549000" />
+      <workItem from="1744204802619" duration="2106000" />
+      <workItem from="1744257435609" duration="20000" />
+      <workItem from="1744295417397" duration="5853000" />
+      <workItem from="1744335925899" duration="6612000" />
+      <workItem from="1744353275007" duration="920000" />
+      <workItem from="1744362676375" duration="778000" />
+      <workItem from="1744371720273" duration="7820000" />
+      <workItem from="1744424064112" duration="2644000" />
+      <workItem from="1744613017119" duration="5543000" />
+      <workItem from="1744641808396" duration="866000" />
+      <workItem from="1744642712026" duration="329000" />
+      <workItem from="1744643068860" duration="5659000" />
+      <workItem from="1744687711113" duration="31985000" />
+      <workItem from="1744772588220" duration="23882000" />
+      <workItem from="1744818553962" duration="4392000" />
+      <workItem from="1744859860746" duration="18052000" />
+      <workItem from="1744900590902" duration="2747000" />
+      <workItem from="1745201765543" duration="3227000" />
+      <workItem from="1745215769579" duration="3470000" />
+      <workItem from="1745251177479" duration="656000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

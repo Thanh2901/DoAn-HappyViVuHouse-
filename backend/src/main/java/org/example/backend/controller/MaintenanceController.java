@@ -73,4 +73,11 @@ public class MaintenanceController {
         return ResponseEntity.ok(maintenanceService.filterMaintenanceTimeAsc(keyword, pageNo, pageSize));
     }
 
+    @GetMapping("/filter/time-desc")
+    public ResponseEntity<?> filterMaintenanceTimeDesc(@RequestParam String keyword,
+                                                      @RequestParam Integer pageNo,
+                                                      @RequestParam Integer pageSize){
+        return ResponseEntity.ok(maintenanceService.filterMaintenanceTimeDesc(keyword, pageNo, pageSize));
+    }
+
 }

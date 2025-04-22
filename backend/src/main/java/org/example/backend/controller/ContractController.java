@@ -144,6 +144,22 @@ public class ContractController {
         return ResponseEntity.ok(contractService.getContractHiredByPriceDesc(keyword, pageNo, pageSize));
     }
 
+    // get contract by status: DA THUE (HIRED) default time asc
+    @GetMapping("/filter/status/hired/time-asc")
+    public ResponseEntity<?> getContractHiredByTimeAsc(@RequestParam(required = false) String keyword,
+                                                         @RequestParam Integer pageNo,
+                                                         @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractHiredByTimeAsc(keyword, pageNo, pageSize));
+    }
+
+    // get contract by status: DA THUE (HIRED) default time asc
+    @GetMapping("/filter/status/hired/time-desc")
+    public ResponseEntity<?> getContractHiredByTimeDesc(@RequestParam(required = false) String keyword,
+                                                       @RequestParam Integer pageNo,
+                                                       @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractHiredByTimeDesc(keyword, pageNo, pageSize));
+    }
+
     // get contract by status: CHUA THUE (ROOM_RENT) default title asc
     @GetMapping("/filter/status/room_rent/title-asc")
     public ResponseEntity<?> getContractRoomRentByTitleAsc(@RequestParam(required = false) String keyword,
@@ -176,6 +192,24 @@ public class ContractController {
         return ResponseEntity.ok(contractService.getContractRoomRentByPriceDesc(keyword, pageNo, pageSize));
     }
 
+    // get contract by status: CHUA THUE (ROOM_RENT) default time asc
+    @GetMapping("/filter/status/room_rent/time-asc")
+    public ResponseEntity<?> getContractRoomRentByTimeAsc(@RequestParam(required = false) String keyword,
+                                                            @RequestParam Integer pageNo,
+                                                            @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractRoomRentByTimeAsc(keyword, pageNo, pageSize));
+    }
+
+    // get contract by status: CHUA THUE (ROOM_RENT) default time desc
+    @GetMapping("/filter/status/room_rent/time-desc")
+    public ResponseEntity<?> getContractRoomRentByTimeDesc(@RequestParam(required = false) String keyword,
+                                                          @RequestParam Integer pageNo,
+                                                          @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractRoomRentByTimeDesc(keyword, pageNo, pageSize));
+    }
+
+
+
     // get contract by status: DA TRA PHONG (CHECKED_OUT) default title asc
     @GetMapping("/filter/status/checked_out/title-asc")
     public ResponseEntity<?> getContractCheckedOutByTitleAsc(@RequestParam(required = false) String keyword,
@@ -206,6 +240,22 @@ public class ContractController {
                                                              @RequestParam Integer pageNo,
                                                              @RequestParam Integer pageSize) {
         return ResponseEntity.ok(contractService.getContractCheckedOutByPriceDesc(keyword, pageNo, pageSize));
+    }
+
+    // get contract by status: DA TRA PHONG (CHECKED_OUT) default time asc
+    @GetMapping("/filter/status/checked_out/time-asc")
+    public ResponseEntity<?> getContractCheckedOutByTimeAsc(@RequestParam(required = false) String keyword,
+                                                              @RequestParam Integer pageNo,
+                                                              @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractCheckedOutByTimeAsc(keyword, pageNo, pageSize));
+    }
+
+    // get contract by status: DA TRA PHONG (CHECKED_OUT) default time desc
+    @GetMapping("/filter/status/checked_out/time-desc")
+    public ResponseEntity<?> getContractCheckedOutByTimeDesc(@RequestParam(required = false) String keyword,
+                                                            @RequestParam Integer pageNo,
+                                                            @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractCheckedOutByTimeDesc(keyword, pageNo, pageSize));
     }
 }
 

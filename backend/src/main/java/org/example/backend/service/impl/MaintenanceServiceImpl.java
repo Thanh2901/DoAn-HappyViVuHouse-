@@ -98,4 +98,11 @@ public class MaintenanceServiceImpl extends BaseService implements MaintenanceSe
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("maintenanceDate").ascending());
         return mapperUtils.convertToResponsePage(maintenanceRepository.searchingMaintenance(keyword, getUserId(), pageable), MaintenanceResponse.class, pageable);
     }
+
+    @Override
+    public Page<MaintenanceResponse> filterMaintenanceTimeDesc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("maintenanceDate").descending());
+        return mapperUtils.convertToResponsePage(maintenanceRepository.searchingMaintenance(keyword, getUserId(), pageable), MaintenanceResponse.class, pageable);
+    }
 }

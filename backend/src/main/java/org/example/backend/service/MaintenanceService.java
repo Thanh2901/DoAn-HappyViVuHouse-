@@ -24,4 +24,6 @@ public interface MaintenanceService {
     Page<MaintenanceResponse> filterPriceDesc(String keyword, Integer pageNo, Integer pageSize);
 
     Page<MaintenanceResponse> filterMaintenanceTimeAsc(String keyword, Integer pageNo, Integer pageSize);
+
+    Page<MaintenanceResponse> filterMaintenanceTimeDesc(String keyword, Integer pageNo, Integer pageSize);
 }
