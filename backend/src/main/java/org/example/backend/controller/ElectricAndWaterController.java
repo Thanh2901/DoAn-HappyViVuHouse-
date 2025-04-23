@@ -81,5 +81,14 @@ public class ElectricAndWaterController {
         ElectricAndWaterResponse electric = electricAndWaterService.getElectricAndWater(id);
         return ResponseEntity.ok(electric);
     }
+
+    @GetMapping("/filter/")
+    public ResponseEntity<?> getElectricAndWaterByFilter(@RequestParam String field,
+                                                         @RequestParam String order,
+                                                         @RequestParam String keyword,
+                                                         @RequestParam Integer pageNo,
+                                                         @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(electricAndWaterService.getElectricAndWaterByFilter(field, order, keyword, pageNo, pageSize));
+    }
 }
 

@@ -65,4 +65,20 @@ public interface ContractService {
     Page<ContractResponse> getContractCheckedOutByTimeAsc(String keyword, Integer pageNo, Integer pageSize);
 
     Page<ContractResponse>  getContractCheckedOutByTimeDesc(String keyword, Integer pageNo, Integer pageSize);
+
+    Page<ContractResponse> getContractHiredByAdditionalFeeAsc(String keyword, Integer pageNo, Integer pageSize);
+
+    Page<ContractResponse> getContractHiredByAdditionalFeeDesc(String keyword, Integer pageNo, Integer pageSize);
+
+    Page<ContractResponse> getContractRoomRentByAdditionalFeeAsc(String keyword, Integer pageNo, Integer pageSize);
+
+    Page<ContractResponse> getContractRoomRentByAdditionalFeeDesc(String keyword, Integer pageNo, Integer pageSize);
+
+    Page<ContractResponse> getContractCheckedOutByAdditionalFeeAsc(String keyword, Integer pageNo, Integer pageSize);
+
+    Page<ContractResponse> getContractCheckedOutByAdditionalFeeDesc(String keyword, Integer pageNo, Integer pageSize);
+
+    Page<ContractResponse> getContractByNameAsc(String keyword, Integer pageNo, Integer pageSize);
+
+    Page<ContractResponse> getContractByNameDesc(String keyword, Integer pageNo, Integer pageSize);
 }

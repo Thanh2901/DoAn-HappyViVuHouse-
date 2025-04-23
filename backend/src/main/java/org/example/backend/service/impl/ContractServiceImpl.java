@@ -598,7 +598,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         // Fetch contracts from repository
         Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
 
-        // Filter contracts where room.status = 'HIRED'
+        // Filter contracts where room.status = 'CHECKED_OUT'
         List<Contract> filteredContracts = contractPage.getContent().stream()
                 .filter(contract -> RoomStatus.CHECKED_OUT.equals(contract.getRoom().getStatus()))
                 .collect(Collectors.toList());
@@ -612,5 +612,175 @@ public class ContractServiceImpl extends BaseService implements ContractService 
 
         // Convert to ContractResponse
         return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractHiredByAdditionalFeeAsc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        // Define sorting by multiple properties
+        Sort sort = Sort.by(
+                Sort.Order.asc("room.waterCost"),
+                Sort.Order.asc("room.publicElectricCost"),
+                Sort.Order.asc("room.internetCost")
+        );
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.HIRED.equals(contract.getRoom().getStatus()))
+                .toList();
+
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractHiredByAdditionalFeeDesc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        // Define sorting by multiple properties
+        Sort sort = Sort.by(
+                Sort.Order.desc("room.waterCost"),
+                Sort.Order.desc("room.publicElectricCost"),
+                Sort.Order.desc("room.internetCost")
+        );
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.HIRED.equals(contract.getRoom().getStatus()))
+                .toList();
+
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractRoomRentByAdditionalFeeAsc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        // Define sorting by multiple properties
+        Sort sort = Sort.by(
+                Sort.Order.asc("room.waterCost"),
+                Sort.Order.asc("room.publicElectricCost"),
+                Sort.Order.asc("room.internetCost")
+        );
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.ROOM_RENT.equals(contract.getRoom().getStatus()))
+                .toList();
+
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractRoomRentByAdditionalFeeDesc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        // Define sorting by multiple properties
+        Sort sort = Sort.by(
+                Sort.Order.desc("room.waterCost"),
+                Sort.Order.desc("room.publicElectricCost"),
+                Sort.Order.desc("room.internetCost")
+        );
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.ROOM_RENT.equals(contract.getRoom().getStatus()))
+                .toList();
+
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractCheckedOutByAdditionalFeeAsc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        // Define sorting by multiple properties
+        Sort sort = Sort.by(
+                Sort.Order.asc("room.waterCost"),
+                Sort.Order.asc("room.publicElectricCost"),
+                Sort.Order.asc("room.internetCost")
+        );
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.CHECKED_OUT.equals(contract.getRoom().getStatus()))
+                .toList();
+
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractCheckedOutByAdditionalFeeDesc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        // Define sorting by multiple properties
+        Sort sort = Sort.by(
+                Sort.Order.desc("room.waterCost"),
+                Sort.Order.desc("room.publicElectricCost"),
+                Sort.Order.desc("room.internetCost")
+        );
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
+        // Fetch contracts from repository
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        // Filter contracts where room.status = 'HIRED'
+        List<Contract> filteredContracts = contractPage.getContent().stream()
+                .filter(contract -> RoomStatus.CHECKED_OUT.equals(contract.getRoom().getStatus()))
+                .toList();
+
+        Page<Contract> filteredPage = new PageImpl<>(
+                filteredContracts,
+                pageable,
+                filteredContracts.size() // Total elements after filtering
+        );
+
+        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractByNameAsc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("name").ascending());
+        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ContractResponse> getContractByNameDesc(String keyword, Integer pageNo, Integer pageSize) {
+        int page = pageNo == 0 ? pageNo : pageNo - 1;
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("name").ascending());
+        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
     }
 }

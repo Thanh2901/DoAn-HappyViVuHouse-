@@ -208,8 +208,6 @@ public class ContractController {
         return ResponseEntity.ok(contractService.getContractRoomRentByTimeDesc(keyword, pageNo, pageSize));
     }
 
-
-
     // get contract by status: DA TRA PHONG (CHECKED_OUT) default title asc
     @GetMapping("/filter/status/checked_out/title-asc")
     public ResponseEntity<?> getContractCheckedOutByTitleAsc(@RequestParam(required = false) String keyword,
@@ -257,5 +255,71 @@ public class ContractController {
                                                             @RequestParam Integer pageSize) {
         return ResponseEntity.ok(contractService.getContractCheckedOutByTimeDesc(keyword, pageNo, pageSize));
     }
+
+    // get contract by status: DA THUE (HIRED) default additional fee asc
+    @GetMapping("/filter/status/hired/additional-fee-asc")
+    public ResponseEntity<?> getContractHiredByAdditionalFeeAsc(@RequestParam(required = false) String keyword,
+                                                                @RequestParam Integer pageNo,
+                                                                @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractHiredByAdditionalFeeAsc(keyword, pageNo, pageSize));
+    }
+
+    // get contract by status: DA THUE (HIRED) default additional fee desc
+    @GetMapping("/filter/status/hired/additional-fee-desc")
+    public ResponseEntity<?> getContractHiredByAdditionalFeeDesc(@RequestParam(required = false) String keyword,
+                                                                @RequestParam Integer pageNo,
+                                                                @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractHiredByAdditionalFeeDesc(keyword, pageNo, pageSize));
+    }
+
+    // get contract by status: CHUA THUE (ROOM_RENT) default additional fee asc
+    @GetMapping("/filter/status/room_rent/additional-fee-asc")
+    public ResponseEntity<?> getContractRoomRentByAdditionalFeeAsc(@RequestParam(required = false) String keyword,
+                                                                 @RequestParam Integer pageNo,
+                                                                 @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractRoomRentByAdditionalFeeAsc(keyword, pageNo, pageSize));
+    }
+
+    // get contract by status: CHUA THUE (ROOM_RENT) default additional fee desc
+    @GetMapping("/filter/status/room_rent/additional-fee-desc")
+    public ResponseEntity<?> getContractRoomRentByAdditionalFeeDesc(@RequestParam(required = false) String keyword,
+                                                                   @RequestParam Integer pageNo,
+                                                                   @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractRoomRentByAdditionalFeeDesc(keyword, pageNo, pageSize));
+    }
+
+    // get contract by status: TRA PHONG (CHECKED_OUT) default additional fee asc
+    @GetMapping("/filter/status/checked_out/additional-fee-asc")
+    public ResponseEntity<?> getContractCheckedOutByAdditionalFeeAsc(@RequestParam(required = false) String keyword,
+                                                                    @RequestParam Integer pageNo,
+                                                                    @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractCheckedOutByAdditionalFeeAsc(keyword, pageNo, pageSize));
+    }
+
+    // get contract by status: TRA PHONG (CHECKED_OUT) default additional fee desc
+    @GetMapping("/filter/status/checked_out/additional-fee-desc")
+    public ResponseEntity<?> getContractCheckedOutByAdditionalFeeDesc(@RequestParam(required = false) String keyword,
+                                                                     @RequestParam Integer pageNo,
+                                                                     @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractCheckedOutByAdditionalFeeDesc(keyword, pageNo, pageSize));
+    }
+
+    // get contract by name (TEN HOP DONG)
+    @GetMapping("/filter/name-asc")
+    public ResponseEntity<?> getContractByNameAsc(@RequestParam(required = false) String keyword,
+                                                  @RequestParam Integer pageNo,
+                                                  @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractByNameAsc(keyword, pageNo, pageSize));
+    }
+
+    // get contract by name (TEN HOP DONG)
+    @GetMapping("/filter/name-desc")
+    public ResponseEntity<?> getContractByNameDesc(@RequestParam(required = false) String keyword,
+                                                  @RequestParam Integer pageNo,
+                                                  @RequestParam Integer pageSize) {
+        return ResponseEntity.ok(contractService.getContractByNameDesc(keyword, pageNo, pageSize));
+    }
+
+
 }
 

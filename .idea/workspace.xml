@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a16e0f2-828e-4899-bc35-7a2d60ddf86f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ContractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ContractController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/MaintenanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/MaintenanceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ElectricAndWaterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ElectricAndWaterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ContractService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ContractService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/MaintenanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/MaintenanceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ElectricAndWaterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ElectricAndWaterService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ContractServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ContractServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/MaintenanceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/MaintenanceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ElectricAndWaterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ElectricAndWaterServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,6 +193,8 @@
       <workItem from="1745201765543" duration="3227000" />
       <workItem from="1745215769579" duration="3470000" />
       <workItem from="1745251177479" duration="656000" />
+      <workItem from="1745374871224" duration="4779000" />
+      <workItem from="1745387737170" duration="108000" />
     </task>
     <servers />
   </component>

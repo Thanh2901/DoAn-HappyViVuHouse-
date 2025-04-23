@@ -14,4 +14,6 @@ public interface ElectricAndWaterService {
     ElectricAndWaterResponse getElectricAndWater(Long id);
 
     Page<ElectricAndWaterResponse> getAllElectricAndWater(String keyword, Integer pageNo, Integer pageSize);
+
+    Page<ElectricAndWaterResponse> getElectricAndWaterByFilter(String field, String order, String keyword, Integer pageNo, Integer pageSize);
 }

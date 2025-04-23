@@ -73,34 +73,49 @@ public class ElectricAndWaterServiceImpl implements ElectricAndWaterService {
                 .orElseThrow(() -> new RuntimeException("Electric not found with id " + id));
     }
 
-//    @Override
-//    public List<ElectricAndWaterResponse> getElectricByRoom(Long id) {
-//        return electricAndWaterRepository.findByRoomId(id).stream().map(electricAndWater -> {
-//            ElectricAndWaterResponse electricAndWaterResponse = new ElectricAndWaterResponse();
-//            electricAndWaterResponse.setId(electricAndWater.getId());
-//            electricAndWaterResponse.setName(electricAndWater.getName());
-//            electricAndWaterResponse.setMonth(electricAndWater.getMonth());
-//            electricAndWaterResponse.setLastMonthBlockOfWater(electricAndWater.getLastMonthBlockOfWater());
-//            electricAndWaterResponse.setThisMonthBlockOfWater(electricAndWater.getThisMonthBlockOfWater());
-//            electricAndWaterResponse.setMoneyEachBlockOfWater(electricAndWater.getMoneyEachBlockOfWater());
-//            electricAndWaterResponse.setTotalMoneyOfWater(electricAndWater.getTotalMoneyOfWater());
-//
-//            electricAndWaterResponse.setLastMonthNumberOfElectric(electricAndWater.getLastMonthNumberOfElectric());
-//            electricAndWaterResponse.setThisMonthNumberOfElectric(electricAndWater.getThisMonthNumberOfElectric());
-//            electricAndWaterResponse.setMoneyEachNumberOfElectric(electricAndWater.getMoneyEachNumberOfElectric());
-//            electricAndWaterResponse.setTotalMoneyOfElectric(electricAndWater.getTotalMoneyOfElectric());
-//
-//            electricAndWaterResponse.setRoom(roomService.getRoomById(electricAndWater.getRoom().getId()));
-//            electricAndWaterResponse.setPaid(electricAndWater.isPaid());
-//
-//            return electricAndWaterResponse;
-//        }).toList();
-//    }
-
     public Page<ElectricAndWaterResponse> getAllElectricAndWater(String keyword, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.title").ascending());
         return mapperUtils.convertToResponsePage(electricAndWaterRepository.searchElectricAndWaterByKeyWord(keyword, pageable), ElectricAndWaterResponse.class, pageable);
+    }
+
+    @Override
+    public Page<ElectricAndWaterResponse> getElectricAndWaterByFilter(String field, String order, String keyword, Integer pageNo, Integer pageSize) {
+        // Validate input parameters
+        if (field == null || field.trim().isEmpty()) {
+            throw new IllegalArgumentException("Field cannot be null or empty");
+        }
+        if (pageNo == null || pageNo < 1) {
+            pageNo = 1; // Default to page 1
+        }
+        if (pageSize == null || pageSize < 1) {
+            pageSize = 10; // Default page size
+        }
+
+        // Convert to 0-based index for Spring Data
+        int page = pageNo - 1;
+
+        // Initialize pageable with sorting
+        Pageable pageable;
+        switch (order != null ? order.toLowerCase() : "") {
+            case "asc":
+                pageable = PageRequest.of(page, pageSize, Sort.by(field).ascending());
+                break;
+            case "desc":
+                pageable = PageRequest.of(page, pageSize, Sort.by(field).descending());
+                break;
+            default:
+                // Default to unsorted if order is invalid
+                pageable = PageRequest.of(page, pageSize, Sort.by("room.title").ascending());
+                break;
+        }
+
+        // Perform search and convert to response
+        return mapperUtils.convertToResponsePage(
+                electricAndWaterRepository.searchElectricAndWaterByKeyWord(keyword, pageable),
+                ElectricAndWaterResponse.class,
+                pageable
+        );
     }
 
     @Override
