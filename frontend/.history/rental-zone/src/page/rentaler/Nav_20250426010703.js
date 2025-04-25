@@ -31,21 +31,6 @@ const Nav = (props) => {
         </button>
         <div className="navbar-collapse collapse">
           <ul className="navbar-nav navbar-align">
-            {/* Dropdown chuyển đổi ngôn ngữ */}
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="langDropdown" data-bs-toggle="dropdown">
-                🌐 {language === "vi" ? "Tiếng Việt" : "English"}
-              </a>
-              <div className="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
-                <button className={`dropdown-item${language === "vi" ? " active" : ""}`} onClick={() => handleLanguageChange("vi")}>
-                  Tiếng Việt
-                </button>
-                <button className={`dropdown-item${language === "en" ? " active" : ""}`} onClick={() => handleLanguageChange("en")}>
-                  English
-                </button>
-              </div>
-            </li>
-            {/* Chat icon dropdown */}
             <li className="nav-item dropdown">
               <a className="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
                 <div className="position-relative">
@@ -63,6 +48,19 @@ const Nav = (props) => {
                     Xem tất cả tin nhắn
                   </Link>
                 </div>
+              </div>
+            </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="langDropdown" data-bs-toggle="dropdown">
+                🌐 {language === "vi" ? "Tiếng Việt" : "English"}
+              </a>
+              <div className="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
+                <button className={`dropdown-item${language === "vi" ? " active" : ""}`} onClick={() => handleLanguageChange("vi")}>
+                  Tiếng Việt
+                </button>
+                <button className={`dropdown-item${language === "en" ? " active" : ""}`} onClick={() => handleLanguageChange("en")}>
+                  English
+                </button>
               </div>
             </li>
             <li className="nav-item dropdown">

@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
-import i18n from "../../utils/i18n/i18n"; // Đảm bảo đúng đường dẫn tới file i18n.js
 import './NavRentaler.css'
 
 const Nav = (props) => {
   const { currentUser, onLogout } = props;
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [language, setLanguage] = useState(i18n.language || "vi");
 
+  // Toggle sidebar function
   const toggleSidebar = () => {
     setSidebarCollapsed(!sidebarCollapsed);
+    // Apply the toggle class to the body element to affect the sidebar
     document.body.classList.toggle('sidebar-collapsed');
-  };
-
-  const handleLanguageChange = (lang) => {
-    setLanguage(lang);
-    i18n.changeLanguage(lang);
-    localStorage.setItem("i18nextLng", lang);
   };
 
   console.log("User", currentUser)
@@ -31,21 +25,6 @@ const Nav = (props) => {
         </button>
         <div className="navbar-collapse collapse">
           <ul className="navbar-nav navbar-align">
-            {/* Dropdown chuyển đổi ngôn ngữ */}
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="langDropdown" data-bs-toggle="dropdown">
-                🌐 {language === "vi" ? "Tiếng Việt" : "English"}
-              </a>
-              <div className="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
-                <button className={`dropdown-item${language === "vi" ? " active" : ""}`} onClick={() => handleLanguageChange("vi")}>
-                  Tiếng Việt
-                </button>
-                <button className={`dropdown-item${language === "en" ? " active" : ""}`} onClick={() => handleLanguageChange("en")}>
-                  English
-                </button>
-              </div>
-            </li>
-            {/* Chat icon dropdown */}
             <li className="nav-item dropdown">
               <a className="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
                 <div className="position-relative">
