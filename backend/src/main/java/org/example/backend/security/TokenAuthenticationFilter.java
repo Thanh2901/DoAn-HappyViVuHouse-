@@ -37,7 +37,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String jwt = getJwtFromRequest(request);
-        logger.info("JWT: {}", jwt);
+//        logger.info("JWT: {}", jwt);
 
         // Only attempt authentication if a token was actually provided
         if (StringUtils.hasText(jwt) && !"undefined".equals(jwt)) {
@@ -65,10 +65,10 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-        logger.info("Authorization Header: {}", bearerToken);
+//        logger.info("Authorization Header: {}", bearerToken);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             String jwt = bearerToken.substring(7).trim();
-            logger.info("Extracted JWT: {}", jwt);
+//            logger.info("Extracted JWT: {}", jwt);
             return jwt;
         }
         return null;

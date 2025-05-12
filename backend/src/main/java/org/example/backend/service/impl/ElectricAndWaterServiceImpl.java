@@ -96,19 +96,13 @@ public class ElectricAndWaterServiceImpl implements ElectricAndWaterService {
         int page = pageNo - 1;
 
         // Initialize pageable with sorting
-        Pageable pageable;
-        switch (order != null ? order.toLowerCase() : "") {
-            case "asc":
-                pageable = PageRequest.of(page, pageSize, Sort.by(field).ascending());
-                break;
-            case "desc":
-                pageable = PageRequest.of(page, pageSize, Sort.by(field).descending());
-                break;
-            default:
+        Pageable pageable = switch (order != null ? order.toLowerCase() : "") {
+            case "asc" -> PageRequest.of(page, pageSize, Sort.by(field).ascending());
+            case "desc" -> PageRequest.of(page, pageSize, Sort.by(field).descending());
+            default ->
                 // Default to unsorted if order is invalid
-                pageable = PageRequest.of(page, pageSize, Sort.by("room.title").ascending());
-                break;
-        }
+                    PageRequest.of(page, pageSize, Sort.by("room.title").ascending());
+        };
 
         // Perform search and convert to response
         return mapperUtils.convertToResponsePage(

@@ -5,13 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a16e0f2-828e-4899-bc35-7a2d60ddf86f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/credentials (1).json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/client/StreamingClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/MinioClientConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/RestClientConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/CameraController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/GeocodingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/VideoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/request/CameraRecordRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/request/CameraRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/request/MediaSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/response/CameraRecordResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/response/CameraResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Camera.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/CameraRecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/CameraRecordRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/CameraRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/CameraRecordService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/CameraStreamService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/UploadMinIOService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraRecordServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraStreamServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/UploadMinIOServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V3__ADD_IS_ACTIVE_TO_CAMERA.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mediamtx.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4/storage_v2/_src_/database/rental-house.N-0RUg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4/storage_v2/_src_/database/rental-house.N-0RUg/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ContractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ContractController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ElectricAndWaterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ElectricAndWaterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ContractService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ContractService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ElectricAndWaterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ElectricAndWaterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ContractServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ContractServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/security/TokenAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/security/TokenAuthenticationFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ElectricAndWaterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ElectricAndWaterServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +50,9 @@
       <list>
         <option value="Enum" />
         <option value="package-info" />
+        <option value="JavaScript File" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -65,6 +92,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Docker.docker-compose.yml.mediamtx: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.generated-requests | #1.executor&quot;: &quot;Run&quot;,
     &quot;Maven.backend [clean].executor&quot;: &quot;Run&quot;,
     &quot;Maven.backend [compile].executor&quot;: &quot;Run&quot;,
@@ -75,7 +103,7 @@
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.BackendApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;thanhvp&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;22&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/DACNTT/Source Code/Happi ViVu House&quot;,
@@ -95,18 +123,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House" />
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House\backend" />
       <recent name="D:\DACNTT\Source Code\Happi ViVu House\backend\src\main\resources\db\migration" />
       <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\src" />
       <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\public" />
-      <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend" />
-      <recent name="D:\DACNTT\Source Code\Happi ViVu House\backend\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\DACNTT\Source Code\Happi ViVu House" />
       <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone" />
       <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\src\page\admin\context" />
       <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\src\services\axios" />
       <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\src\assets" />
-      <recent name="D:\DACNTT\Source Code\Happi ViVu House\frontend\rental-zone\public\assets\css" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.example.backend.enums" />
@@ -123,8 +151,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.mediamtx: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="mediamtx" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.mediamtx: Compose Deployment" />
         <item itemvalue="HTTP Request.generated-requests | #1" />
       </list>
     </recent_temporary>
@@ -194,11 +242,52 @@
       <workItem from="1745215769579" duration="3470000" />
       <workItem from="1745251177479" duration="656000" />
       <workItem from="1745374871224" duration="4779000" />
-      <workItem from="1745387737170" duration="108000" />
+      <workItem from="1745387737170" duration="4205000" />
+      <workItem from="1745417029382" duration="1434000" />
+      <workItem from="1745465604085" duration="1951000" />
+      <workItem from="1745596349833" duration="3277000" />
+      <workItem from="1745726408505" duration="6266000" />
+      <workItem from="1745810548727" duration="11456000" />
+      <workItem from="1745894373620" duration="15259000" />
+      <workItem from="1745918057670" duration="2961000" />
+      <workItem from="1745936691507" duration="6193000" />
+      <workItem from="1745985803821" duration="3655000" />
+      <workItem from="1746071952634" duration="12304000" />
+      <workItem from="1746154430079" duration="18857000" />
+      <workItem from="1746234879053" duration="14525000" />
+      <workItem from="1746350039749" duration="9447000" />
+      <workItem from="1746413081943" duration="17642000" />
+      <workItem from="1746501963862" duration="1122000" />
+      <workItem from="1746516180856" duration="6068000" />
+      <workItem from="1746584450654" duration="6924000" />
+      <workItem from="1746673705717" duration="1632000" />
+      <workItem from="1746757159328" duration="4183000" />
+      <workItem from="1746853405019" duration="2850000" />
+      <workItem from="1746931459984" duration="573000" />
+      <workItem from="1747015302702" duration="2211000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:org.springframework.security:spring-security-core" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-core" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:react" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:styled-components" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.validation:jakarta.validation-api" />
+    <option featureType="dependencySupport" implementationName="java:io.projectreactor:reactor-core" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.data:spring-data-commons" />
+    <option featureType="dependencySupport" implementationName="executable:kubectl" />
+    <option featureType="dependencySupport" implementationName="java:org.hibernate.validator:hibernate-validator" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-webmvc" />
+    <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-websocket" />
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.persistence:jakarta.persistence-api" />
+    <option featureType="dependencySupport" implementationName="java:org.flywaydb:flyway-core" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-messaging" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
   </component>
 </project>

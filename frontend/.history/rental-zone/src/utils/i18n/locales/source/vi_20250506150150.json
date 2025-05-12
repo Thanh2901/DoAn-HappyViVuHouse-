@@ -1,0 +1,96 @@
+{
+    "rentaler": {
+      "statistics": {
+        "title": "Thống kê",
+        "total_rooms": "Tổng phòng",
+        "number_of_tenants": "Số người thuê",
+        "available_rooms": "Phòng trống",
+        "revenue": {
+          "title": "Doanh thu",
+          "revenue_from_room_rental": "Doanh thu tiền phòng",
+          "revenue_from_other_costs": "Doanh thu từ chi phí khác"
+        }
+      },
+      "rental_rooms_management": {
+        "title": "Quản lý phòng trọ",
+        "subtitle": "Quản lý hiệu quả tất cả các chức năng của phòng.",
+        "add_room": "Thêm phòng",
+        "room_name": "Tên phòng",
+        "address": "Địa chỉ",
+        "price": "Giá tiền",
+        "status": "Trạng thái",
+        "hidden": "Ẩn",
+        "show": "Hiện",
+        "approve": "Duyệt",
+        "action": "Hành động"
+      },
+      "maintenance_management": {
+        "title": "Quản lý bảo trì",
+        "subtitle": "Quản lý bảo trì nhà trọ.",
+        "add_maintenance_ticket": "Thêm phiếu bảo trì",
+        "room_name": "Tên phòng",
+        "address": "Địa chỉ",
+        "maintenance_ticket": "Phiếu bảo trì",
+        "cost": "Chi phí",
+        "time": "Thời gian",
+        "action": "Hành động",
+        "watch": "Xem"
+      },
+      "contracts_management": {
+        "title": "Quản lý hợp đồng",
+        "subtitle": "Quản lý hợp đồng của những người thuê trọ.",
+        "add_contract": "Thêm hợp đồng",
+        "contract_name": "Tên hợp đồng",
+        "room_name": "Tên phòng",
+        "tenants": "Người thuê",
+        "phone_number": "Số điện thoại",
+        "contract": "Hợp đồng",
+        "room_price": "Giá phòng",
+        "additional_fee": "Phụ phí",
+        "duration": "Thời hạn",
+        "status": "Trạng thái",
+        "action": "Hành động",
+        "checked_out": "Đã trả phòng",
+        "hired": "Đã thuê",
+        "room_rent": "Chưa thuê",
+        "watch": "Xem"
+      },
+      "requests_management": {
+        "title": "Quản lý yêu cầu",
+        "subtitle": "Quản lý yêu cầu của người thuê.",
+        "room_name": "Tên phòng",
+        "tenant_name": "Tên người thuê",
+        "tenant_phone": "Số điện thoại",
+        "description": "Mô tả",
+        "status": "Trạng thái",
+        "action": "Hành động",
+        ""
+      },
+      "electric_and_water_management": {
+        "title": "Quản lý điện nước",
+        "subtitle": "Quản lý hóa đơn điện nước của người thuê trọ.",
+        "bill_title": "Tên hóa đơn",
+        "room_name": "Tên phòng",
+        "add_bill": "Thêm hóa đơn",
+        "month": "Tháng",
+        "last_month_electric_usage": "Số điện tháng trước",
+        "this_month_electric_usage": "Số điện tháng này",
+        "last_month_water_usage": "Số khối tháng trước",
+        "this_month_water_usage": "Số khối tháng này",
+        "total_electricity_cost": "Tổng tiền điện",
+        "total_water_cost": "Tổng tiền nước",
+        "status": "Trạng thái",
+        "action": "Hành động"
+      },
+      "search": "Tìm kiếm",
+      "common": {
+        "all": "Tất cả"
+      },
+      "pagination": {
+        "firstPart": "Hiển thị từ 1 đến 10 của",
+        "secondPart": "đối tượng",
+        "previous": "Trước",
+        "next": "Tiếp theo"
+      }
+    }
+  }

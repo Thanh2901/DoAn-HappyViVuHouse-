@@ -1,0 +1,116 @@
+{
+    "rentaler": {
+      "statistics": {
+        "title": "Statistics",
+        "total_rooms": "Total rooms",
+        "number_of_tenants": "Number of tenants",
+        "available_rooms": "Available rooms",
+        "revenue": {
+          "title": "Revenue",
+          "revenue_from_room_rental": "Revenue from room rental",
+          "revenue_from_other_costs": "Revenue from other costs"
+        }
+      },
+      "rental_rooms_management": {
+        "title": "Rental rooms management",
+        "subtitle": "Effectively manage all room functions.",
+        "add_room": "Add room",
+        "room_name": "Room name",
+        "address": "Address",
+        "price": "Price",
+        "status": "Status",
+        "hidden": "Hidden",
+        "show": "Show",
+        "approve": "Approve",
+        "action": "Action",
+        "room_creation": "Room Creation",
+        "basicInfo": "Basic info",
+        "description": "Description",
+        "costInfo": "Cost Information"
+      },
+      "maintenance_management": {
+        "title": "Maintenance management",
+        "subtitle": "Boarding house maintenance management.",
+        "add_maintenance_ticket": "Add ticket",
+        "room_name": "Room name",
+        "address": "Address",
+        "maintenance_ticket": "Maintenance ticket",
+        "cost": "Cost",
+        "time": "Time",
+        "action": "Action",
+        "watch": "Watch"
+      },
+      "contracts_management": {
+        "title": "Contracts management",
+        "subtitle": "Manage contracts of tenants.",
+        "add_contract": "Add contract",
+        "contract_name": "Contract name",
+        "room_name": "Room name",
+        "tenants": "Tenants",
+        "phone_number": "Phone number",
+        "contract": "Contract",
+        "room_price": "Room price",
+        "additional_fee": "Additional fee",
+        "duration": "Duration",
+        "status": "Status",
+        "action": "Action",
+        "checked_out": "Check out",
+        "hired": "Hired",
+        "room_rent": "Room rent",
+        "watch": "Watch"
+      },
+      "requests_management": {
+        "title": "Requests management",
+        "subtitle": "Manage tenant requests for the boarding house.",
+        "room_name": "Room name",
+        "tenant_name": "Tenant name",
+        "tenant_phone": "Tenant phone",
+        "description": "Description",
+        "status": "Status",
+        "action": "Action",
+        "processed": "Processed",
+        "unprocessed": "Unprocessed"
+      },
+      "electric_and_water_management": {
+        "title": "Electric and water management",
+        "subtitle": "Tenant electricity and water bill management.",
+        "add_bill": "Add bill",
+        "bill_title": "Bill title",
+        "room_name": "Room name",
+        "month": "Month",
+        "last_month_electric_usage": "Last month electric usage",
+        "this_month_electric_usage": "This month electric usage",
+        "last_month_water_usage": "Last month water usage",
+        "this_month_water_usage": "This month water usage",
+        "total_electricity_cost": "Total electricity cost",
+        "total_water_cost": "Total water cost",
+        "status": "Status",
+        "action": "Action"
+      },
+      "search": "Search",
+      "common": {
+        "all": "All"
+      },
+      "pagination": {
+        "firstPart": "Display 1 to 10 of",
+        "secondPart": "items",
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "camera_management": {
+        "title": "Camera management",
+        "subtitle": "Manage the camera system of the boarding house.",
+        "add_camera": "Add camera",
+        "camera_name": "Camera name",
+        "camera_location": "Camera location",
+        "camera_status": "Camera status",
+        "action": "Action",
+        "watch": "Watch",
+        "detail": "Detail",
+        "edit": "Edit",
+        "delete": "Delete",
+        "inactive": "Inactive",
+        "active": "Active"
+      }
+    }
+  }

@@ -25,7 +25,51 @@ services:
       - "61613:61613"
     volumes:
       - activemq-data:/opt/activemq/data
+    restart: unless-stopped
+
+  mediamtx:
+    image: bluenviron/mediamtx:latest
+    container_name: mediamtx
+    ports:
+      - "8554:8554" # RTSP
+      - "1935:1935" # RTMP
+      - "8888:8888" # HLS
+      - "8889:8889" # WebRTC
+      - "8189:8189/udp" # SRT
+      - "9997:9997" # API
+    environment:
+      - MTX_PROTOCOLS=tcp,udp
+      - MTX_LOGLEVEL=info
+      - MTX_WEBRTCADDITIONALHOSTS=0.0.0.0
+    volumes:
+      - ./mediamtx.yml:/mediamtx.yml # Optional: for custom configuration
+    restart: unless-stopped
+
+  minio:
+    image: minio/minio
+    container_name: minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: password123  # Đã thay đổi thành mật khẩu dài hơn 8 ký tự
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    restart: unless-stopped
 
 volumes:
   rental-house-data:
   activemq-data:
+  minio-data:
+  ollama-data:
