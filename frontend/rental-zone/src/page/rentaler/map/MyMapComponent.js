@@ -1,59 +1,78 @@
-import React, { useEffect } from "react";
-import { compose, withProps } from "recompose";
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker
-} from "react-google-maps";
+import React, { useEffect, useRef } from "react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
-const MapComponent = compose(
-  withProps({
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=AIzaSyDvF2YFxTxLRUxDRvtkISAma8qICwwsAIY&v=3.exp&libraries=geometry,drawing,places`,
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
-    mapElement: <div style={{ height: `100%` }} />
-  }),
-  withScriptjs,
-  withGoogleMap
-)((props) => (
-  <GoogleMap defaultZoom={8} defaultCenter={{ lat: 21.0302655 , lng: 105.7846598 }}>
-    {props.isMarkerShown && (
-      <Marker position={{ lat: 21.0302655 , lng: 105.7846598 }} />
-    )}
-  </GoogleMap>
-));
-
-const Map = ({ longitude, latitude }) => {
-  console.log("Lat", latitude, longitude);
-
-  // AIzaSyD7L7A81EJ_E3-iT0-srgna6QPRqSHuMsg
+// Sử dụng Leaflet trực tiếp thay vì react-leaflet để tránh các vấn đề tương thích
+const SimpleMapComponent = ({ latitude, longitude }) => {
+  const mapContainerRef = useRef(null);
+  const mapInstanceRef = useRef(null);
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDvF2YFxTxLRUxDRvtkISAma8qICwwsAIY&v=3.exp&libraries=geometry,drawing,places`;
-    script.async = true;
-    script.defer = true;
+    // Kiểm tra điều kiện hợp lệ
+    if (!latitude || !longitude || !mapContainerRef.current) {
+      return;
+    }
 
-    const handleScriptError = () => {
-      console.error("Error loading Google Maps script.");
-    };
+    // Parse các giá trị thành số
+    const lat = parseFloat(latitude);
+    const lng = parseFloat(longitude);
 
-    script.addEventListener("error", handleScriptError);
+    // Nếu đã có instance map, hủy nó để tạo mới
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.remove();
+    }
 
-    document.body.appendChild(script);
+    // Custom icon hình ngôi nhà
+    const houseIcon = L.icon({
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/69/69524.png", // icon ngôi nhà
+      iconSize: [20, 20],
+      iconAnchor: [19, 38],
+      popupAnchor: [0, -38],
+      shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+      shadowSize: [30, 30],
+      shadowAnchor: [13, 41]
+    });
 
+    // Tạo một instance map mới
+    const map = L.map(mapContainerRef.current).setView([lat, lng], 15);
+    mapInstanceRef.current = map;
+
+    // Thêm layer bản đồ
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19
+    }).addTo(map);
+
+    // Thêm marker hình ngôi nhà
+    const marker = L.marker([lat, lng], { icon: houseIcon }).addTo(map);
+    marker.bindPopup(`<b>Vị trí đã chọn</b><br>Lat: ${lat}, Lng: ${lng}`).openPopup();
+
+    // Đảm bảo bản đồ hiển thị đúng kích thước
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 300);
+
+    // Cleanup khi component unmount
     return () => {
-      script.removeEventListener("error", handleScriptError);
-      document.body.removeChild(script);
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
     };
-  }, []);
+  }, [latitude, longitude]);
 
-  if (!longitude || !latitude) {
-    return <div>Error: Invalid latitude or longitude.</div>;
-  }
-
-  return <MapComponent isMarkerShown latitude={longitude} longitude={latitude} />;
+  return (
+    <div 
+      ref={mapContainerRef} 
+      style={{ 
+        height: "300px", 
+        width: "100%", 
+        marginTop: "10px",
+        border: "1px solid #ddd",
+        borderRadius: "4px" 
+      }}
+    />
+  );
 };
 
-export default Map;
+export default SimpleMapComponent;

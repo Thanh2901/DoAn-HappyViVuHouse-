@@ -167,7 +167,7 @@ function ContractManagement(props) {
                     >
                       <thead>
                         <tr>
-                          <th>{translate("rentaler.contracts_management.contract_name")}</th>
+                          <th>{translate("rentaler:contracts_management:contract_name")}</th>
                           <th>{translate("rentaler.contracts_management.room_name")}</th>
                           <th>{translate("rentaler.contracts_management.tenants")}</th>
                           <th>{translate("rentaler.contracts_management.phone_number")}</th>

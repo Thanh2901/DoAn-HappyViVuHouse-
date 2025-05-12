@@ -1,76 +1,125 @@
-import { useState } from "react";
-import { Input, List } from "antd";
+import React, { useState, useCallback } from "react";
+import { Input, List, message, Spin } from "antd";
+import debounce from "lodash/debounce";
+import { geocodingService } from "../../../services/axios/MapService";
 
-import useGoogle from "react-google-autocomplete/lib/usePlacesAutocompleteService";
-
-const PlacesWithStandaloneSearchBox = ({ latLong }) => {
-  const {
-    placePredictions,
-    getPlacePredictions,
-    isPlacePredictionsLoading,
-  } = useGoogle({
-    apiKey: 'AIzaSyDvF2YFxTxLRUxDRvtkISAma8qICwwsAIY',
-  });
+const StandaloneSearchBox = ({ latLong }) => {
   const [value, setValue] = useState("");
-  const [selectedPlace, setSelectedPlace] = useState(null);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
-  const handlePlaceSelect = (place) => {
-    setValue(place.description);
-    setSelectedPlace(place);
-
-    // Retrieve latitude and longitude for the selected place
-    const geocoder = new window.google.maps.Geocoder();
-    geocoder.geocode({ placeId: place.place_id }, (results, status) => {
-      if (status === window.google.maps.GeocoderStatus.OK) {
-        const { lat, lng } = results[0].geometry.location;
-        setLatitude(lat());
-        setLongitude(lng());
-        latLong(lat(),lng(), place.description)
+  // Debounce để tránh gọi API quá nhiều lần khi người dùng gõ
+  const debouncedSearch = useCallback(
+    debounce(async (searchText) => {
+      if (!searchText) {
+        setResults([]);
+        setHasSearched(false);
+        return;
       }
-    });
+      
+      try {
+        setLoading(true);
+        setHasSearched(true);
+        console.log("Đang tìm kiếm địa chỉ:", searchText);
+        
+        const data = await geocodingService.search(searchText);
+        console.log("Kết quả tìm kiếm:", data);
+        
+        // Đảm bảo data là một mảng
+        if (Array.isArray(data)) {
+          setResults(data);
+        } else {
+          console.warn("Dữ liệu trả về không phải mảng:", data);
+          setResults([]);
+        }
+      } catch (error) {
+        console.error("Lỗi khi tìm kiếm địa chỉ:", error);
+        
+        // Hiển thị thông báo lỗi chi tiết hơn
+        if (error.response) {
+          message.error(`Lỗi từ server: ${error.response.status} - ${error.response.statusText}`);
+        } else if (error.request) {
+          message.error("Không nhận được phản hồi từ server. Vui lòng kiểm tra kết nối mạng.");
+        } else {
+          message.error("Không thể tìm kiếm địa chỉ: " + error.message);
+        }
+        
+        setResults([]);
+      } finally {
+        setLoading(false);
+      }
+    }, 500), // Đợi 500ms sau khi người dùng dừng gõ
+    []
+  );
 
-    // Clear the place predictions
-    getPlacePredictions({ input: "" });
+  const handleSearch = (searchText) => {
+    setValue(searchText);
+    if (!searchText) {
+      setResults([]);
+      setHasSearched(false);
+    } else {
+      debouncedSearch(searchText);
+    }
+  };
+
+  const handleSelect = (item) => {
+    setValue(item.display_name);
+    setResults([]);
+    setHasSearched(false);
+    latLong(parseFloat(item.lat), parseFloat(item.lon), item.display_name);
   };
 
   return (
     <div style={{ width: "100%" }}>
       <Input.Search
-        style={{ color: "black" }}
         value={value}
-        placeholder="Địa chỉ"
-        onChange={(evt) => {
-          getPlacePredictions({ input: evt.target.value });
-          setValue(evt.target.value);
-        }}
-        loading={isPlacePredictionsLoading}
+        placeholder="Nhập địa chỉ cần tìm"
+        onChange={(e) => handleSearch(e.target.value)}
+        loading={loading}
+        allowClear
       />
-      <div
-        style={{
-          marginTop: "20px",
-          width: "100%",
-          height: "200px",
-          display: "flex",
-          flex: "1",
-          flexDirection: "column",
-          marginBottom: "100px",
-        }}
-      >
-        {!isPlacePredictionsLoading && (
+      
+      <div style={{ marginTop: 8 }}>
+        {loading ? (
+          <div style={{ textAlign: 'center', padding: '12px 0' }}>
+            <Spin tip="Đang tìm kiếm..." />
+          </div>
+        ) : results.length > 0 ? (
           <List
-            dataSource={placePredictions}
+            dataSource={results.slice(0, 5)}
             renderItem={(item) => (
-              <List.Item onClick={() => handlePlaceSelect(item)}>
-                <List.Item.Meta title={item.description} />
+              <List.Item 
+                onClick={() => handleSelect(item)} 
+                style={{ 
+                  cursor: "pointer",
+                  padding: '10px',
+                  transition: 'background-color 0.3s'
+                }}
+                className="address-item"
+                hoverable
+              >
+                <List.Item.Meta 
+                  title={item.display_name} 
+                  description={`Loại: ${item.type || 'Không xác định'}`}
+                />
               </List.Item>
             )}
+            style={{
+              maxHeight: 250,
+              overflowY: results.length > 5 ? "auto" : "unset",
+              border: "1px solid #f0f0f0",
+              borderRadius: "4px"
+            }}
           />
-        )}
+        ) : hasSearched && value ? (
+          <div style={{ padding: '10px', color: '#999', textAlign: 'center' }}>
+            Không tìm thấy kết quả
+          </div>
+        ) : null}
       </div>
     </div>
   );
 };
 
-export default PlacesWithStandaloneSearchBox;
+export default StandaloneSearchBox;
