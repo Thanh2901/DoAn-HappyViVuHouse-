@@ -1,0 +1,69 @@
+/* Hamburger icon styling - two lines version */
+.hamburger {
+    display: block;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    cursor: pointer;
+}
+
+.hamburger:before,
+.hamburger:after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #495057;
+    position: absolute;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.hamburger:before {
+    top: 8px;
+}
+
+.hamburger:after {
+    bottom: 8px;
+}
+
+/* Subtle animation for toggle without changing to X */
+.sidebar-toggle.active .hamburger:before {
+    width: 18px;
+}
+
+.sidebar-toggle.active .hamburger:after {
+    width: 18px;
+}
+
+/* Sidebar toggle functionality */
+.sidebar-toggle {
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Sidebar states */
+#sidebar {
+    transition: margin-left 0.3s ease;
+    width: 260px;
+}
+
+#sidebar.toggled {
+    margin-left: -260px;
+}
+
+/* Responsive adjustments for the main content when sidebar is toggled */
+body.sidebar-toggled .content {
+    margin-left: 0;
+    width: 100%;
+}
+
+/* Default content positioning when sidebar is visible */
+.content {
+    transition: margin-left 0.3s ease, width 0.3s ease;
+    margin-left: 260px;
+    width: calc(100% - 260px);
+}

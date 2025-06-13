@@ -1,0 +1,352 @@
+/* src/components/NotificationSystem.css */
+
+.notification-container {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Position variants */
+.notification-container.top-right {
+  top: 20px;
+  right: 20px;
+}
+
+.notification-container.top-left {
+  top: 20px;
+  left: 20px;
+}
+
+.notification-container.bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+.notification-container.bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+.notification-container.top-center {
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.notification-container.bottom-center {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.notification {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  margin-bottom: 12px;
+  padding: 16px;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.notification:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.notification:active {
+  transform: translateY(0);
+  transition: transform 0.1s ease;
+}
+
+/* Notification types */
+.notification.message {
+  border-left: 4px solid #007bff;
+}
+
+.notification.file {
+  border-left: 4px solid #28a745;
+}
+
+.notification.image {
+  border-left: 4px solid #6f42c1;
+}
+
+.notification.join {
+  border-left: 4px solid #17a2b8;
+}
+
+.notification.leave {
+  border-left: 4px solid #ffc107;
+}
+
+.notification.error {
+  border-left: 4px solid #dc3545;
+}
+
+.notification.warning {
+  border-left: 4px solid #fd7e14;
+}
+
+.notification.success {
+  border-left: 4px solid #28a745;
+}
+
+/* Animation classes */
+.notification-enter {
+  animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notification-exit {
+  animation: slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* For left positioned notifications */
+.notification-container.top-left .notification-enter,
+.notification-container.bottom-left .notification-enter {
+  animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notification-container.top-left .notification-exit,
+.notification-container.bottom-left .notification-exit {
+  animation: slideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Notification content */
+.notification-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notification-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.notification-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+}
+
+.notification.file .notification-icon {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.notification.image .notification-icon {
+  background: rgba(111, 66, 193, 0.1);
+  color: #6f42c1;
+}
+
+.notification.join .notification-icon {
+  background: rgba(23, 162, 184, 0.1);
+  color: #17a2b8;
+}
+
+.notification.leave .notification-icon {
+  background: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+}
+
+.notification-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-title {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #1a1a1a;
+  margin: 0;
+  word-break: break-word;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.notification-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #666;
+}
+
+.notification-message {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  word-break: break-word;
+  margin: 0;
+  padding-left: 36px; /* Align with icon */
+}
+
+.notification-file-info {
+  font-size: 12px;
+  color: #666;
+  padding-left: 36px;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .notification {
+    background: #2d3748;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+  }
+
+  .notification-title {
+    color: #f7fafc;
+  }
+
+  .notification-message {
+    color: #e2e8f0;
+  }
+
+  .notification-time {
+    color: #a0aec0;
+  }
+
+  .notification-close {
+    color: #a0aec0;
+  }
+
+  .notification-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .notification-container {
+    left: 16px !important;
+    right: 16px !important;
+    max-width: none;
+    transform: none !important;
+  }
+
+  .notification {
+    margin-bottom: 8px;
+    padding: 12px;
+  }
+
+  .notification-header {
+    gap: 8px;
+  }
+
+  .notification-message {
+    padding-left: 32px;
+    font-size: 13px;
+  }
+
+  .notification-title {
+    font-size: 13px;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .notification {
+    transition: none;
+  }
+
+  .notification-enter,
+  .notification-exit {
+    animation: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .notification {
+    border: 2px solid #000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .notification-title {
+    font-weight: 700;
+  }
+}

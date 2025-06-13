@@ -1,0 +1,433 @@
+/* ModalRoomDetail.css */
+
+/* Tổng thể */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Tiêu đề */
+.title-single-box {
+    margin-bottom: 20px;
+}
+
+.title-single {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000;
+}
+
+/* Swiper carousel */
+.swiper-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Giá phòng */
+.property-price {
+    background: #e6f7e9;
+    padding: 15px;
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-header-c {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-box-ico {
+    font-size: 1.5rem;
+    color: #28a745;
+}
+
+.card-title-c h5 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+/* Grid 4 ô vuông */
+.grid .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid .col-md-3 {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid .property-summary,
+.grid .property-description,
+.grid .amenities-list {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-box-d {
+    margin-bottom: 10px;
+}
+
+.title-d {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+/* Xóa ::after trong phần grid */
+.grid .title-d::after {
+    content: none;
+}
+
+.summary-list ul,
+.amenities-list ul {
+    padding: 0;
+    list-style: none;
+    flex: 1;
+}
+
+.summary-list li,
+.amenities-list li {
+    padding: 5px 0;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.summary-list li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+}
+
+.amenities-list li::before {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg>') ' ';
+    color: #28a745;
+}
+
+.amenities-list li.no-check::before {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/></svg>') ' ';
+    color: #dc3545;
+}
+
+.property-description p {
+    font-size: 0.95rem;
+    color: #333;
+    flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .grid .col-md-3 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    .grid .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+.title-d {
+    font-size: 24px !important;
+}
+
+.list-a > li::before {
+    content: none !important;
+}
+
+/* ModalRoomDetail.css */
+
+/* Tổng thể */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Tiêu đề */
+.title-single-box {
+    margin-bottom: 20px;
+}
+
+.title-single {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000;
+}
+
+/* Swiper carousel */
+.swiper-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Giá phòng */
+.property-price {
+    background: #e6f7e9;
+    padding: 15px;
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-header-c {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-box-ico {
+    font-size: 1.5rem;
+    color: #28a745;
+}
+
+.card-title-c h5 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+/* Grid 4 ô vuông */
+.grid .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid .col-md-3 {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid .property-summary,
+.grid .property-description,
+.grid .amenities-list {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-box-d {
+    margin-bottom: 10px;
+}
+
+.title-d {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+/* Xóa ::after trong phần grid */
+.grid .title-d::after {
+    content: none;
+}
+
+.summary-list ul {
+    padding: 0;
+    list-style: none;
+    flex: 1;
+}
+
+.summary-list li {
+    padding: 5px 0;
+    font-size: 0.95rem;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+}
+
+.property-description p {
+    font-size: 0.95rem;
+    color: #333;
+    flex: 1;
+}
+
+/* Phần Tiện ích */
+/* Update the amenities list styling */
+.amenities-list {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.amenities-list ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 0;
+    list-style: none;
+    flex: 1;
+}
+
+.amenities-list li {
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    width: 100% !important;
+    color: #333;
+    transition: all 0.3s ease;
+    /* Remove aspect-ratio constraint */
+    display: flex;
+    align-items: center;
+    /* Change from justify-content: flex-end to flex-start */
+    justify-content: flex-start;
+    /* Ensure text can wrap properly */
+    word-break: normal;
+    word-wrap: break-word;
+    /* Ensure text is visible */
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+    /* Add minimum height instead of aspect ratio */
+    min-height: 50px;
+}
+
+.amenities-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: #e9ecef;
+}
+
+/* Optional: Add icon before text */
+.amenities-list li::before {
+    content: "✓ ";
+    color: #28a745;
+    margin-right: 5px;
+}
+
+.modal-content {
+    border-radius: 16px !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    border: none;
+    background: #f9f9f9;
+}
+.modal-header, .modal-footer {
+    border: none;
+    background: transparent;
+}
+.modal-body {
+    padding: 32px 24px 24px 24px;
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #28a745;
+    text-align: center;
+    width: 100%;
+}
+.btn-close {
+    background: #e9ecef;
+    border-radius: 50%;
+    opacity: 1;
+    transition: background 0.2s;
+}
+.btn-close:hover {
+    background: #28a745;
+    color: #fff;
+}
+
+.nav-pills .nav-link {
+    border-radius: 20px;
+    margin: 0 8px;
+    font-weight: 600;
+    color: #28a745;
+    background: #e9ecef;
+    transition: background 0.2s, color 0.2s;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background: #28a745;
+    color: #fff;
+}
+
+.property-summary, .property-description, .amenities-list {
+    box-shadow: 0 2px 12px rgba(40,167,69,0.07);
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    background: #fff;
+    margin-bottom: 16px;
+}
+.title-d {
+    color: #28a745;
+    font-size: 1.25rem;
+}
+
+.property-agent img {
+    border-radius: 50%;
+    border: 3px solid #28a745;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+.property-agent h4 {
+    color: #28a745;
+    font-weight: 700;
+}
+
+.comment {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+.comment .author {
+    font-weight: 600;
+    color: #28a745;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 8px !important;
+    }
+    .modal-body {
+        padding: 12px !important;
+    }
+}
+
+.property-summary, .property-description, .amenities-list, .comment {
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.property-summary:hover, .property-description:hover, .amenities-list:hover, .comment:hover {
+    box-shadow: 0 8px 24px rgba(40,167,69,0.12);
+    transform: translateY(-2px) scale(1.01);
+}
+
+.leaflet-container {
+  height: 300px !important;
+  width: 100% !important;
+}

@@ -54,4 +54,6 @@ public interface RoomService {
     Page<RoomResponse> getRoomRentalerByApproveAsc(String title, Integer pageNo, Integer pageSize);
 
     Page<RoomResponse> getRoomRentalerByApproveDesc(String title, Integer pageNo, Integer pageSize);
+
+    Page<RoomResponse> getRentOfHomeBill();
 }

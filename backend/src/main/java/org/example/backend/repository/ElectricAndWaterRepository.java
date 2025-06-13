@@ -17,10 +17,12 @@ public interface ElectricAndWaterRepository extends JpaRepository<ElectricAndWat
 
     @Query("SELECT ew FROM ElectricAndWater ew " +
             "WHERE 1=1 " +
+            "AND :userId IS NULL OR ew.room.user.id = :userId " +
             "AND (:keyword IS NULL OR :keyword = '' OR " +
             "ew.room.title LIKE CONCAT('%', :keyword, '%') OR " +
             "ew.name LIKE CONCAT('%', :keyword, '%') OR " +
             "CAST(ew.month AS string) LIKE CONCAT('%', :keyword, '%'))")
     Page<ElectricAndWater> searchElectricAndWaterByKeyWord(@Param("keyword") String keyword,
+                                        @Param("userId") Long userId,
                                         Pageable pageable);
 }

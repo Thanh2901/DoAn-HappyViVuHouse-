@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'happy-vivu-house'
+    scrape_interval: 6s
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8080']
+
+
+#Dựa trên output từ http://localhost:8080/actuator/prometheus, bạn có các metrics như:
+#application_ready_time_seconds: Thời gian ứng dụng sẵn sàng.
+#application_started_time_seconds: Thời gian khởi động ứng dụng.
+#disk_free_bytes: Dung lượng đĩa trống.
+#disk_total_bytes: Tổng dung lượng đĩa.
+#executor_active_threads: Số thread đang hoạt động.
+#executor_completed_tasks_total: Tổng số task đã hoàn thành.
+#executor_pool_core_threads, executor_pool_max_threads, executor_pool_size_threads: Thông tin về thread pool.

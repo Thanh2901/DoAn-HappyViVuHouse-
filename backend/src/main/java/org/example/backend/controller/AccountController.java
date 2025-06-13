@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/account")
@@ -51,9 +50,8 @@ public class AccountController {
 
     @PostMapping("/send-mail-rentaler")
     private ResponseEntity<?> sendEmailForRentaler(@RequestBody SendEmailRequest sendEmailRequest) throws MessagingException, IOException {
-        return ResponseEntity.ok(accountService.sendEmailOfCustomer(sendEmailRequest));
+        return ResponseEntity.ok(accountService.sendEmailForRentaler(sendEmailRequest));
     }
-
 
     @PostMapping("/{id}/authorization")
     private ResponseEntity<?> divideAuthorization(@PathVariable Long id, @RequestBody RoleRequest roleRequest) throws MessagingException, IOException {

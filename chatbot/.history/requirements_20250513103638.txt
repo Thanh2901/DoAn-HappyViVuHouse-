@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pandas
+numpy
+langchain
+langchain-ollama
+langchain-chroma
+unidecode
+tqdm

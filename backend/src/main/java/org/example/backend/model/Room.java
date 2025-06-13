@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.backend.enums.LockedStatus;
 import org.example.backend.enums.RoomStatus;
+import org.example.backend.enums.RoomType;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,6 +37,9 @@ public class Room extends AbstractEntity<Long> {
 
     @Column(name = "is_approve")
     private Boolean isApprove;
+
+    @Enumerated(EnumType.STRING)
+    private RoomType type; // Thêm trường để phân biệt loại tin: REGULAR hoặc VIP
 
     @Column(name = "is_remove")
     private Boolean isRemove;

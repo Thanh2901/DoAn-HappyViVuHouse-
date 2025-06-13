@@ -21,7 +21,6 @@ import java.util.Map;
 public class UploadMinIOServiceImpl implements UploadMinIOService {
     private final MinioClient minioClient;
 
-    // Map of common file extensions to MIME types
     private static final Map<String, String> MIME_TYPES = new HashMap<>();
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
@@ -52,18 +51,17 @@ public class UploadMinIOServiceImpl implements UploadMinIOService {
     }
 
     @Override
-    public String uploadFile(File file, String objectName, String bucketName) {
+    public String uploadFile(File file, String objectName, String bucketName, String cameraName) {
         try {
             ensureBucketExists(bucketName);
 
-            // Kiểm tra kích thước và tính toàn vẹn của file trước khi upload
             if (file.length() == 0) {
                 throw new IllegalArgumentException("File is empty: " + file.getAbsolutePath());
             }
 
-            // Thêm tiền tố thư mục theo ngày
+            // tạo đường dẫn với cameraName và datePrefix
             String datePrefix = getDatePrefix();
-            String newObjectName = datePrefix + "/" + objectName;
+            String newObjectName = String.format("%s/%s/%s", cameraName, datePrefix, objectName);
 
             String fileUrl = uploadFileToBucket(file, newObjectName, bucketName);
             log.info("File uploaded successfully: {}", fileUrl);
@@ -75,26 +73,21 @@ public class UploadMinIOServiceImpl implements UploadMinIOService {
     }
 
     @Override
-    public String uploadVideoToBucket(File file, String objectName, String bucketName) throws Exception {
-        // Đảm bảo file có đuôi .mp4
+    public String uploadVideoToBucket(File file, String objectName, String bucketName, String cameraName) throws Exception {
         if (!objectName.toLowerCase().endsWith(".mp4")) {
             objectName += ".mp4";
         }
 
-        // Thêm tiền tố thư mục theo ngày
         String datePrefix = getDatePrefix();
-        String newObjectName = datePrefix + "/" + objectName;
+        String newObjectName = String.format("%s/%s/%s", cameraName, datePrefix, objectName);
 
-        // Đảm bảo mime type là video/mp4
         String contentType = "video/mp4";
 
-        // Kiểm tra file có tồn tại và có kích thước > 0
         if (!file.exists() || file.length() == 0) {
             throw new IllegalArgumentException("Video file is invalid or empty: " + file.getAbsolutePath());
         }
 
         try (FileInputStream inputStream = new FileInputStream(file)) {
-            // Thêm các headers khi upload video
             Map<String, String> headers = new HashMap<>();
             headers.put("Content-Type", contentType);
             headers.put("X-Content-Type-Options", "nosniff");
@@ -115,19 +108,16 @@ public class UploadMinIOServiceImpl implements UploadMinIOService {
     }
 
     @Override
-    public String uploadVideoBytes(byte[] videoBytes, String objectName, String bucketName) throws Exception {
+    public String uploadVideoBytes(byte[] videoBytes, String objectName, String bucketName, String cameraName) throws Exception {
         ensureBucketExists(bucketName);
 
-        // Đảm bảo file có đuôi .mp4
         if (!objectName.toLowerCase().endsWith(".mp4")) {
             objectName += ".mp4";
         }
 
-        // Thêm tiền tố thư mục theo ngày
         String datePrefix = getDatePrefix();
-        String newObjectName = datePrefix + "/" + objectName;
+        String newObjectName = String.format("%s/%s/%s", cameraName, datePrefix, objectName);
 
-        // Đảm bảo có dữ liệu để upload
         if (videoBytes == null || videoBytes.length == 0) {
             throw new IllegalArgumentException("Video data is empty");
         }
@@ -148,7 +138,6 @@ public class UploadMinIOServiceImpl implements UploadMinIOService {
 
             minioClient.putObject(args);
 
-            // Kiểm tra xem đối tượng đã được tạo thành công
             StatObjectResponse stat = minioClient.statObject(
                     StatObjectArgs.builder()
                             .bucket(bucketName)
@@ -163,8 +152,7 @@ public class UploadMinIOServiceImpl implements UploadMinIOService {
             throw new RuntimeException("Failed to upload video bytes to MinIO", e);
         }
 
-        String fileUrl = String.format("%s/%s", bucketName, newObjectName);
-        return fileUrl;
+        return String.format("%s/%s", bucketName, newObjectName);
     }
 
     private void ensureBucketExists(String bucketName) throws Exception {
@@ -186,7 +174,6 @@ public class UploadMinIOServiceImpl implements UploadMinIOService {
     private String uploadFileToBucket(File file, String objectName, String bucketName) throws Exception {
         String contentType = getContentType(file);
 
-        // Kiểm tra nếu là file video MP4, đảm bảo content-type đúng
         if (objectName.toLowerCase().endsWith(".mp4")) {
             contentType = "video/mp4";
         }
@@ -235,7 +222,6 @@ public class UploadMinIOServiceImpl implements UploadMinIOService {
         }
     }
 
-    // Hàm tạo tiền tố thư mục theo ngày
     private String getDatePrefix() {
         return LocalDate.now().format(DATE_FORMATTER);
     }

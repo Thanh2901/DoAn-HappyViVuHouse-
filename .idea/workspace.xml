@@ -5,39 +5,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a16e0f2-828e-4899-bc35-7a2d60ddf86f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/credentials (1).json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/client/StreamingClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/MinioClientConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/RestClientConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/CameraController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/GeocodingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/VideoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/request/CameraRecordRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/request/CameraRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/request/MediaSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/response/CameraRecordResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/response/CameraResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Camera.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/CameraRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/CameraRecordRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/CameraRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/CameraRecordService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/CameraStreamService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/UploadMinIOService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraRecordServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraStreamServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/UploadMinIOServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V3__ADD_IS_ACTIVE_TO_CAMERA.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mediamtx.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/CsvExportService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CsvExportServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4/storage_v2/_src_/database/rental-house.N-0RUg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4/storage_v2/_src_/database/rental-house.N-0RUg/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/BackendApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/EmailConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/EmailConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/security/TokenAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/security/TokenAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/WebSocketConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ElectricAndWaterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ElectricAndWaterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/MessageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/RoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/CameraRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/CameraRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/MessageChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/MessageChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/RoomMedia.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/RoomMedia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/CameraRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/CameraRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/ContractRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/ContractRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/ElectricAndWaterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/ElectricAndWaterRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/RoomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/RoomRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/CameraStreamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/CameraStreamService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ElectricAndWaterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ElectricAndWaterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/FileStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/FileStorageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/RoomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/RoomService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/UploadMinIOService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/UploadMinIOService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraRecordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraRecordServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraStreamServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraStreamServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ContractServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ContractServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ElectricAndWaterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ElectricAndWaterServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/RoomServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/RoomServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/StatisticalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/StatisticalServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/UploadMinIOServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/UploadMinIOServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/confirm-email.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/confirm-email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V2__alter_user(name)_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V2__alter_user(name)_table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot/chrone_lanagchain_db/68891f75-5728-4a8f-a7a7-7bb98a166de6/data_level0.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot/chrone_lanagchain_db/68891f75-5728-4a8f-a7a7-7bb98a166de6/header.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot/chrone_lanagchain_db/68891f75-5728-4a8f-a7a7-7bb98a166de6/length.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot/chrone_lanagchain_db/68891f75-5728-4a8f-a7a7-7bb98a166de6/link_lists.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot/chrone_lanagchain_db/chroma.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatbot/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot/realistic_restaurant_reviews.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/chatbot/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot/vector.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatbot/vector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,10 +66,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="package-info" />
         <option value="JavaScript File" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -73,7 +91,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Thanh2901/DoAn-HappyViVuHouse-.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/Thanh2901/HappyViVuHouse.git&quot;,
     &quot;accountId&quot;: &quot;3d135db4-3a25-4cb2-ac24-1e220c7770ab&quot;
   }
 }</component>
@@ -92,7 +110,11 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Docker.docker-compose.yml.chatbot: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.grafana: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.mediamtx: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.prometheus: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.rental-house-db: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.generated-requests | #1.executor&quot;: &quot;Run&quot;,
     &quot;Maven.backend [clean].executor&quot;: &quot;Run&quot;,
     &quot;Maven.backend [compile].executor&quot;: &quot;Run&quot;,
@@ -102,6 +124,7 @@
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Spring Boot.BackendApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;thanhvp&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;22&quot;,
@@ -141,12 +164,16 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BackendApplication">
-    <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" requestIdentifier="#1" runType="Run single request">
-      <method v="2" />
-    </configuration>
     <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="backend" />
+      <option name="SHORTEN_COMMAND_LINE" value="ARGS_FILE" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.backend.BackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="SHORTEN_COMMAND_LINE" value="ARGS_FILE" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -154,6 +181,32 @@
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.chatbot: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="chatbot" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.grafana: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="grafana" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
       </deployment>
       <method v="2" />
     </configuration>
@@ -170,10 +223,39 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.prometheus: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="prometheus" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.rental-house-db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="rental-house-db" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.prometheus: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.rental-house-db: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.chatbot: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.grafana: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.mediamtx: Compose Deployment" />
-        <item itemvalue="HTTP Request.generated-requests | #1" />
       </list>
     </recent_temporary>
   </component>
@@ -264,7 +346,48 @@
       <workItem from="1746757159328" duration="4183000" />
       <workItem from="1746853405019" duration="2850000" />
       <workItem from="1746931459984" duration="573000" />
-      <workItem from="1747015302702" duration="2211000" />
+      <workItem from="1747015302702" duration="10318000" />
+      <workItem from="1747106081905" duration="7371000" />
+      <workItem from="1747186791956" duration="3680000" />
+      <workItem from="1747240723621" duration="629000" />
+      <workItem from="1747276120750" duration="4510000" />
+      <workItem from="1747363194220" duration="5489000" />
+      <workItem from="1747447661522" duration="4411000" />
+      <workItem from="1747538827622" duration="4049000" />
+      <workItem from="1747667055140" duration="1167000" />
+      <workItem from="1747709030583" duration="465000" />
+      <workItem from="1747814403553" duration="1204000" />
+      <workItem from="1747994924855" duration="3493000" />
+      <workItem from="1748012713770" duration="3891000" />
+      <workItem from="1748105369761" duration="1982000" />
+      <workItem from="1748229141737" duration="8401000" />
+      <workItem from="1748252468991" duration="970000" />
+      <workItem from="1748311722838" duration="630000" />
+      <workItem from="1748356190206" duration="1301000" />
+      <workItem from="1748399161900" duration="25000" />
+      <workItem from="1748424858752" duration="3618000" />
+      <workItem from="1748435439396" duration="384000" />
+      <workItem from="1748546607427" duration="935000" />
+      <workItem from="1748570313198" duration="5345000" />
+      <workItem from="1748609284430" duration="13834000" />
+      <workItem from="1748656718415" duration="629000" />
+      <workItem from="1748775730776" duration="2542000" />
+      <workItem from="1748830778548" duration="1740000" />
+      <workItem from="1748851106204" duration="2877000" />
+      <workItem from="1748951053362" duration="2729000" />
+      <workItem from="1749001665361" duration="151000" />
+      <workItem from="1749144464396" duration="4373000" />
+      <workItem from="1749176820935" duration="208000" />
+      <workItem from="1749230267036" duration="2606000" />
+      <workItem from="1749259267751" duration="11694000" />
+      <workItem from="1749402911865" duration="2200000" />
+      <workItem from="1749434594977" duration="19299000" />
+      <workItem from="1749522626580" duration="9951000" />
+      <workItem from="1749574463343" duration="7384000" />
+      <workItem from="1749605998204" duration="12327000" />
+      <workItem from="1749697355459" duration="9545000" />
+      <workItem from="1749741102998" duration="4322000" />
+      <workItem from="1749778550912" duration="4251000" />
     </task>
     <servers />
   </component>
@@ -289,5 +412,15 @@
     <option featureType="dependencySupport" implementationName="java:org.flywaydb:flyway-core" />
     <option featureType="dependencySupport" implementationName="java:org.springframework:spring-messaging" />
     <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="jakarta.mail.internet.AddressException" package="jakarta.mail.internet" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -66,12 +66,16 @@ public class SecurityConfig {
             "/customer/room/**",
             "/account/send-mail/contact",
             "/account/customer/**",
-            "/room/{userId}/rentaler", // Tách riêng, không dùng /** sau {userId}
-            "/account/{id}",           // Tách riêng, không dùng /** sau {id}
+            "/room/{userId}/rentaler",
+            "/account/{id}",
             "/request/customer",
             "/view-file/**",
             "/document/**",
             "/image/**",
+            "/upload-file",
+            "/files/**",
+            "/actuator/**",
+            "/metrics",
             // Thêm các đường dẫn Swagger sau đây
             "/swagger-ui/**",
             "/swagger-ui.html",
@@ -113,7 +117,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // Hardcode để test
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:8080")); // Hardcode để test
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With")); // Hỗ trợ header Authorization
         configuration.setExposedHeaders(Arrays.asList("Authorization")); // Trả về header Authorization nếu cần

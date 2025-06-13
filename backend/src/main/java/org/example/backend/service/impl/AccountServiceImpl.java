@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -41,7 +40,7 @@ public class AccountServiceImpl implements AccountService {
     private final MapperUtils mapperUtils;
     private final JavaMailSender mailSender;
     private final RoleRepository roleRepository;
-    @Value("{thanhvuworkspace@gmail.com}")
+    @Value("${spring.mail.username}")
     private String from;
 
     @Override

@@ -46,6 +46,12 @@ public class RoomController {
         return ResponseEntity.ok(roomService.getRentOfHome());
     }
 
+
+    @GetMapping("/rent-home-bill")
+    public ResponseEntity<?> getRentOfHomeBill() {
+        return ResponseEntity.ok(roomService.getRentOfHomeBill());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getRoomById(@PathVariable Long id) {
         return ResponseEntity.ok(roomService.getRoomById(id));
@@ -104,8 +110,8 @@ public class RoomController {
     @PostMapping("/{roomId}/comments")
     public ResponseEntity<?> addComment(@CurrentUser UserPrincipal userPrincipal, @PathVariable Long roomId,
                                         @RequestBody CommentDTO commentDTO) {
-        System.out.println(commentDTO.getRateRating());
-        return roomService.addComment(userPrincipal.getId(), commentDTO).equals("Thêm bình luận thành công")
+        String result = roomService.addComment(userPrincipal.getId(), commentDTO);
+        return result.equals("Comment added successfully")
                 ? ResponseEntity.ok("Thêm bình luận thành công")
                 : new ResponseEntity<>("Thêm bình luận thất bại", HttpStatus.BAD_REQUEST);
     }

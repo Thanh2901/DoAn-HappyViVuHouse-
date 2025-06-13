@@ -13,6 +13,7 @@ import org.bytedeco.javacv.FFmpegLogCallback;
 import org.bytedeco.javacv.Frame;
 import org.example.backend.client.StreamingClient;
 import org.example.backend.model.Camera;
+import org.example.backend.model.CameraRecord;
 import org.example.backend.repository.CameraRecordRepository;
 import org.example.backend.repository.CameraRepository;
 import org.example.backend.service.CameraRecordService;
@@ -26,6 +27,7 @@ import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -56,7 +58,6 @@ public class CameraRecordServiceImpl implements CameraRecordService {
         FFmpegLogCallback.set();
         avutil.av_log_set_level(avutil.AV_LOG_VERBOSE);
 
-        // Configure FFmpeg logging to SLF4J
         Logger ffmpegLogger = Logger.getLogger("org.bytedeco.ffmpeg");
         ffmpegLogger.setLevel(Level.ALL);
         ffmpegLogger.addHandler(new java.util.logging.Handler() {
@@ -75,14 +76,11 @@ public class CameraRecordServiceImpl implements CameraRecordService {
                 }
             }
             @Override
-            public void flush() {
-            }
+            public void flush() {}
             @Override
-            public void close() throws SecurityException {
-            }
+            public void close() throws SecurityException {}
         });
 
-        // Initialize ExecutorService
         executor = Executors.newFixedThreadPool(10);
         log.info("FFmpeg logging initialized with verbose level, ExecutorService started");
     }
@@ -132,7 +130,10 @@ public class CameraRecordServiceImpl implements CameraRecordService {
             Files.deleteIfExists(testFile.toPath());
             log.info("Camera {} connection test successful. Proceeding with full recording.", camera.getId());
 
+            LocalDateTime startTime = LocalDateTime.now();
             File videoFile = recordVideoFromCameraToFile(camera.getId(), 300); // 5 minutes
+            LocalDateTime endTime = LocalDateTime.now();
+
             if (videoFile == null || !videoFile.exists() || videoFile.length() == 0) {
                 log.error("Failed to record video for camera {}: file is null or empty", camera.getId());
                 failedCameras.add(camera.getId());
@@ -141,8 +142,21 @@ public class CameraRecordServiceImpl implements CameraRecordService {
 
             log.info("Successfully recorded video for camera {}, file size: {} bytes", camera.getId(), videoFile.length());
             String objectName = "startup_camera_" + camera.getId() + "_" + System.currentTimeMillis() + ".mp4";
-            String fileUrl = uploadMinIOService.uploadFile(videoFile, objectName, bucketName);
+            String safeCameraName = camera.getName() != null ? camera.getName().replaceAll("[^a-zA-Z0-9-_]", "_") : "unknown_camera_" + camera.getId();
+            String fileUrl = uploadMinIOService.uploadFile(videoFile, objectName, bucketName, safeCameraName);
             log.info("Startup video for camera {} uploaded successfully: {}", camera.getId(), fileUrl);
+
+            CameraRecord record = new CameraRecord();
+            record.setCamera(camera);
+            record.setVideoUrl(fileUrl);
+            record.setStartTime(startTime);
+            record.setEndTime(endTime);
+            try {
+                cameraRecordRepository.save(record);
+                log.info("Saved camera record for camera {} to database: {}", camera.getId(), fileUrl);
+            } catch (Exception e) {
+                log.error("Failed to save camera record for camera {}: {}", camera.getId(), e.getMessage());
+            }
 
             Files.deleteIfExists(videoFile.toPath());
         } catch (Exception e) {
@@ -196,7 +210,7 @@ public class CameraRecordServiceImpl implements CameraRecordService {
                 grabber.setOption("timeout", "15000000");
                 grabber.setOption("stimeout", "15000000");
                 grabber.setOption("buffer_size", "65536");
-                grabber.setOption("threads", "2"); // Limit FFmpeg threads
+                grabber.setOption("threads", "2");
 
                 if (camera.getHttpUrl().startsWith("rtsp://")) {
                     grabber.setFormat("rtsp");
@@ -323,12 +337,12 @@ public class CameraRecordServiceImpl implements CameraRecordService {
                         log.warn("Error closing grabber: {}", e.getMessage());
                     }
                 }
-                if (tempFile != null && tempFile.exists() && (tempFile.length() == 0)) {
+                if (tempFile != null && tempFile.exists() && tempFile.length() == 0) {
                     Files.deleteIfExists(tempFile.toPath());
                 }
             }
         }
-        return null; // Không bao giờ đến đây do throw ở trên
+        return null;
     }
 
     public File fallbackRecord(Long cameraId, int durationSeconds, Throwable t) {
@@ -341,10 +355,32 @@ public class CameraRecordServiceImpl implements CameraRecordService {
     public byte[] recordVideoFromCamera(Long cameraId, int durationSeconds) throws Exception {
         File videoFile = null;
         try {
+            LocalDateTime startTime = LocalDateTime.now();
             videoFile = recordVideoFromCameraToFile(cameraId, durationSeconds);
+            LocalDateTime endTime = LocalDateTime.now();
+
             if (videoFile == null || !videoFile.exists()) {
                 throw new IllegalStateException("Failed to record video for camera ID: " + cameraId);
             }
+
+            Camera camera = cameraRepository.findById(cameraId)
+                    .orElseThrow(() -> new IllegalArgumentException("Camera not found with ID: " + cameraId));
+            String objectName = "camera_" + cameraId + "_" + System.currentTimeMillis() + ".mp4";
+            String safeCameraName = camera.getName() != null ? camera.getName().replaceAll("[^a-zA-Z0-9-_]", "_") : "unknown_camera_" + cameraId;
+            String fileUrl = uploadMinIOService.uploadFile(videoFile, objectName, bucketName, safeCameraName);
+
+            CameraRecord record = new CameraRecord();
+            record.setCamera(camera);
+            record.setVideoUrl(fileUrl);
+            record.setStartTime(startTime);
+            record.setEndTime(endTime);
+            try {
+                cameraRecordRepository.save(record);
+                log.info("Saved camera record for camera {} to database: {}", cameraId, fileUrl);
+            } catch (Exception e) {
+                log.error("Failed to save camera record for camera {}: {}", cameraId, e.getMessage());
+            }
+
             return Files.readAllBytes(videoFile.toPath());
         } finally {
             if (videoFile != null && videoFile.exists()) {

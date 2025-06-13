@@ -14,11 +14,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // Cấu hình ActiveMQ làm message broker
         config.enableStompBrokerRelay("/topic")
                 .setRelayHost("localhost")
-                .setRelayPort(61613) // Cổng STOMP mặc định của ActiveMQ
+                .setRelayPort(9613) // Cổng STOMP mặc định của ActiveMQ
                 .setClientLogin("admin")
-                .setClientPasscode("admin");
+                .setClientPasscode("admin")
+                .setSystemHeartbeatReceiveInterval(5000)
+                .setSystemHeartbeatSendInterval(5000);
         config.setApplicationDestinationPrefixes("/app");
         config.setUserDestinationPrefix("/user");
+
     }
 
     @Override

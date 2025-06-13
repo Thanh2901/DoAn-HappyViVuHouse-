@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -44,10 +45,15 @@ public class RoomServiceImpl extends BaseService implements RoomService {
 
     @Override
     public MessageResponse addNewRoom(RoomRequest roomRequest) {
+        Optional<Room> existedRoom = roomRepository.findByLatitudeAndLongitude(roomRequest.getLatitude(), roomRequest.getLongitude());
+        if (existedRoom.isPresent()) {
+            throw new BadRequestException("Room already exists");
+        }
+
         Location location = locationRepository.
-                findById(roomRequest.getLocationId()).orElseThrow(() -> new BadRequestException("Thành phố chưa tồn tại."));
+                findById(roomRequest.getLocationId()).orElseThrow(() -> new BadRequestException("City does not exist."));
         Category category = categoryRepository.findById(roomRequest.getCategoryId())
-                .orElseThrow(() -> new BadRequestException("Danh mục không tồn tại"));
+                .orElseThrow(() -> new BadRequestException("Category does not exist"));
 
         Room room = new Room(
                 roomRequest.getTitle(),
@@ -65,6 +71,7 @@ public class RoomServiceImpl extends BaseService implements RoomService {
                 roomRequest.getWaterCost(),
                 roomRequest.getPublicElectricCost(),
                 roomRequest.getInternetCost());
+
         roomRepository.save(room);
 
         for (MultipartFile file : roomRequest.getFiles()) {
@@ -75,54 +82,53 @@ public class RoomServiceImpl extends BaseService implements RoomService {
             roomMediaRepository.save(roomMedia);
         }
 
-        for (AssetRequest asset: roomRequest.getAssets()) {
+        for (AssetRequest asset : roomRequest.getAssets()) {
             Asset a = new Asset();
             a.setRoom(room);
             a.setName(asset.getName());
             a.setNumber(asset.getNumber());
             assetRepository.save(a);
         }
-        return MessageResponse.builder().message("Thêm tin phòng thành công").build();
+        return MessageResponse.builder().message("Room added successfully").build();
     }
-
 
     // default sort
     @Override
     public Page<RoomResponse> getRoomByRentaler(String title, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("title").ascending());
-        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
-        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
+        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
     }
 
     @Override
     public RoomResponse getRoomById(Long id) {
         return mapperUtils.convertToResponse(roomRepository.findById(id).orElseThrow(() ->
-                new BadRequestException("Phòng trọ này không tồn tại.")), RoomResponse.class);
+                new BadRequestException("This room does not exist.")), RoomResponse.class);
     }
 
     @Override
     public Room getRoom(Long id) {
         return mapperUtils.convertToEntity(roomRepository.findById(id).orElseThrow(() ->
-                new BadRequestException("Phòng trọ này không tồn tại.")), Room.class);
+                new BadRequestException("This room does not exist.")), Room.class);
     }
 
     @Override
     public MessageResponse disableRoom(Long id) {
-        Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Thông tin phòng không tồn tại."));
+        Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Room information does not exist."));
         room.setIsLocked(LockedStatus.DISABLE);
         roomRepository.save(room);
-        return MessageResponse.builder().message("Bài đăng của phòng đã được ẩn đi.").build();
+        return MessageResponse.builder().message("Room post has been hidden.").build();
     }
 
     @Override
     @Transactional
     public MessageResponse updateRoomInfo(Long id, RoomRequest roomRequest) {
-        Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Thông tin phòng không tồn tại."));
+        Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Room information does not exist."));
         Location location = locationRepository.
-                findById(roomRequest.getLocationId()).orElseThrow(() -> new BadRequestException("Thành phố chưa tồn tại."));
+                findById(roomRequest.getLocationId()).orElseThrow(() -> new BadRequestException("City does not exist."));
         Category category = categoryRepository.findById(roomRequest.getCategoryId())
-                .orElseThrow(() -> new BadRequestException("Danh mục không tồn tại"));
+                .orElseThrow(() -> new BadRequestException("Category does not exist"));
         room.setUpdatedBy(getUsername());
         room.setTitle(roomRequest.getTitle());
         room.setDescription(roomRequest.getDescription());
@@ -151,67 +157,67 @@ public class RoomServiceImpl extends BaseService implements RoomService {
         }
 
         assetRepository.deleteAllByRoom(room);
-        for (AssetRequest asset: roomRequest.getAssets()) {
+        for (AssetRequest asset : roomRequest.getAssets()) {
             Asset a = new Asset();
             a.setRoom(room);
             a.setName(asset.getName());
             a.setNumber(asset.getNumber());
             assetRepository.save(a);
         }
-        return MessageResponse.builder().message("Cập nhật thông tin thành công").build();
+        return MessageResponse.builder().message("Room information updated successfully").build();
     }
 
     @Override
     public Page<RoomResponse> getRentOfHome() {
-        Pageable pageable = PageRequest.of(0,100);
-        return mapperUtils.convertToResponsePage(roomRepository.getAllRentOfHome( getUserId(), pageable), RoomResponse.class, pageable);
+        Pageable pageable = PageRequest.of(0, 100);
+        return mapperUtils.convertToResponsePage(roomRepository.getAllRentOfHomeForContract(getUserId(), pageable), RoomResponse.class, pageable);
     }
 
     @Override
     public MessageResponse checkoutRoom(Long id) {
-        Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Phòng không còn tồn tại"));
+        Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Room does not exist"));
         room.setStatus(RoomStatus.CHECKED_OUT);
         roomRepository.save(room);
-        return MessageResponse.builder().message("Trả phòng và xuất hóa đơn thành công.").build();
+        return MessageResponse.builder().message("Room checked out and invoice generated successfully.").build();
     }
 
     @Override
     public MessageResponse isApproveRoom(Long id) {
-        Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Phòng không còn tồn tại"));
+        Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Room does not exist"));
         if (room.getIsApprove().equals(Boolean.TRUE)) {
-            throw new BadRequestException("Phòng đã được phê duyệt");
+            throw new BadRequestException("Room has already been approved");
         } else {
             room.setIsApprove(Boolean.TRUE);
         }
         roomRepository.save(room);
-        return MessageResponse.builder().message("Phê duyệt tin phòng thành công.").build();
+        return MessageResponse.builder().message("Room approved successfully.").build();
     }
 
     @Override
     public MessageResponse removeRoom(Long id) {
-        Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Phòng không còn tồn tại"));
-        if(Boolean.TRUE.equals(room.getIsRemove())){
-            throw new BadRequestException("Bài đăng đã bị gỡ");
+        Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Room does not exist"));
+        if (Boolean.TRUE.equals(room.getIsRemove())) {
+            throw new BadRequestException("Post has already been removed");
         }
         room.setIsRemove(Boolean.TRUE);
         roomRepository.save(room);
-        return MessageResponse.builder().message("Bài đăng đã bị gỡ thành công").build();
+        return MessageResponse.builder().message("Post removed successfully").build();
     }
 
     @Override
     public String addComment(Long id, CommentDTO commentDTO) {
         try {
-            Room room = roomRepository.findById(commentDTO.getRoom_id()).orElseThrow(() -> new BadRequestException("Phòng không còn tồn tại"));
-            User user = userRepository.findById(id).orElseThrow(() -> new BadRequestException("Người dùng không tồn tại"));
+            Room room = roomRepository.findById(commentDTO.getRoom_id()).orElseThrow(() -> new BadRequestException("Room does not exist"));
+            User user = userRepository.findById(id).orElseThrow(() -> new BadRequestException("User does not exist"));
             Rate rate = new Rate();
             rate.setRating(commentDTO.getRateRating());
             rate.setUser(user);
             rate.setRoom(room);
             Comment comment = new Comment(commentDTO.getContent(), user, room, rate);
             commentRepository.save(comment);
-            return "Thêm bình luận thành công";
+            return "Comment added successfully";
         } catch (Exception e) {
-            return "Thêm bình luận thất bại";
+            return "Failed to add comment";
         }
     }
 
@@ -227,7 +233,7 @@ public class RoomServiceImpl extends BaseService implements RoomService {
         Pageable pageable = PageRequest.of(page, pageSize);
 
         Page<Room> rooms = roomRepository.searchingRoomForAdmin(title, approve, pageable);
-        log.info("Số lượng phòng tìm thấy: {}", rooms.getTotalElements());
+        log.info("Number of rooms found: {}", rooms.getTotalElements());
         for (Room room : rooms) {
             log.info("Room ID: {}, isApprove: {}, type: {}",
                     room.getId(),
@@ -242,7 +248,7 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     public Page<RoomResponse> getRoomByUserId(Long userId, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize);
-        return mapperUtils.convertToResponsePage(roomRepository.searchingRoomForCustomer(null,null,null, userId, pageable), RoomResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(roomRepository.searchingRoomForCustomer(null, null, null, userId, pageable), RoomResponse.class, pageable);
     }
 
     @Override
@@ -269,7 +275,7 @@ public class RoomServiceImpl extends BaseService implements RoomService {
                     room1.setInternetCost(room.getInternetCost());
                     return roomRepository.save(room1);
                 })
-                .orElseThrow(() -> new BadRequestException("Phòng không tồn tại"));
+                .orElseThrow(() -> new BadRequestException("Room does not exist"));
     }
 
     // get room rentaler order by price desc
@@ -277,18 +283,17 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     public Page<RoomResponse> getRoomRentalerByPriceDesc(String title, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("price").descending());
-        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
-        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
+        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
     }
-
 
     // get room rentaler order by price asc
     @Override
     public Page<RoomResponse> getRoomRentalerByPriceAsc(String title, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("price").ascending());
-        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
-        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
+        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
     }
 
     // priority: status: DA THUE
@@ -296,8 +301,8 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     public Page<RoomResponse> getRoomRentalerByStatusDesc(String title, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("status").descending());
-        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
-        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
+        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
     }
 
     // priority: status: CHUA THUE
@@ -305,8 +310,8 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     public Page<RoomResponse> getRoomRentalerByStatusAsc(String title, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("status").ascending());
-        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
-        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
+        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
     }
 
     // priority: isApprove: CHUA DUYET
@@ -314,8 +319,8 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     public Page<RoomResponse> getRoomRentalerByApproveAsc(String title, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("is_approve").ascending());
-        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
-        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
+        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
     }
 
     // priority: isApprove: DA DUYET
@@ -323,25 +328,17 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     public Page<RoomResponse> getRoomRentalerByApproveDesc(String title, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("is_approve").descending());
-        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
-        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId() ,pageable),RoomResponse.class,pageable);
+        Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
     }
 
-//    private List<RoomResponse> sortRooms(List<RoomResponse> rooms, String typeSort) {
-//        if ("Thời gian: Mới đến cũ".equals(typeSort)) {
-//            rooms.sort(Comparator.comparing(RoomResponse::getCreatedAt).reversed());
-//        } else if ("Thời gian: Cũ đến mới".equals(typeSort)) {
-//            rooms.sort(Comparator.comparing(RoomResponse::getCreatedAt));
-//        } else if ("Giá: Thấp đến cao".equals(typeSort)) {
-//            rooms.sort(Comparator.comparing(RoomResponse::getPrice));
-//        } else if ("Giá: Cao đến thấp".equals(typeSort)) {
-//            rooms.sort(Comparator.comparing(RoomResponse::getPrice).reversed());
-//        }
-//
-//        return rooms;
-//    }
+    @Override
+    public Page<RoomResponse> getRentOfHomeBill() {
+        Pageable pageable = PageRequest.of(0, 100);
+        return mapperUtils.convertToResponsePage(roomRepository.getAllRentOfHomeForBill(getUserId(), pageable), RoomResponse.class, pageable);
+    }
 
     private User getUser() {
-        return userRepository.findById(getUserId()).orElseThrow(() -> new BadRequestException("Người dùng không tồn tại"));
+        return userRepository.findById(getUserId()).orElseThrow(() -> new BadRequestException("User does not exist"));
     }
 }

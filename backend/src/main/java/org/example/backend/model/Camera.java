@@ -1,6 +1,8 @@
 package org.example.backend.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +17,11 @@ public class Camera extends AbstractEntity<Long>{
     private String name;
     private String ip;
     private int port;
-    private boolean isActive = true; // Mặc định là true để ghi hình
+    private boolean isActive = true;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     // Tạo URL camera từ ip và port
     public String getHttpUrl() {

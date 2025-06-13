@@ -13,10 +13,9 @@ import org.example.backend.model.Camera;
 import org.example.backend.model.CameraRecord;
 import org.example.backend.repository.CameraRecordRepository;
 import org.example.backend.repository.CameraRepository;
-import org.example.backend.service.CameraRecordService;
+import org.example.backend.service.BaseService;
 import org.example.backend.service.CameraStreamService;
 import org.example.backend.utils.MapperUtils;
-import org.quartz.Scheduler;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,13 +25,11 @@ import java.util.concurrent.Executors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class CameraStreamServiceImpl implements CameraStreamService {
+public class CameraStreamServiceImpl extends BaseService implements CameraStreamService {
     private final CameraRepository cameraRepository;
     private final MapperUtils mapperUtils;
     private final StreamingClient streamingClient;
-    private final Scheduler scheduler;
     private final CameraRecordRepository cameraRecordRepository;
-    private final CameraRecordService cameraRecordService;
     private final ExecutorService executorService = Executors.newFixedThreadPool(10);
 
     @PostConstruct
@@ -75,19 +72,15 @@ public class CameraStreamServiceImpl implements CameraStreamService {
 
     @Override
     public CameraResponse createCamera(CameraRequest cameraRequest) {
-        // Lưu camera
         Camera camera = mapperUtils.convertToEntity(cameraRequest, Camera.class);
         Camera savedCamera = cameraRepository.save(camera);
         log.info("Đã lưu camera: id={}, name={}, httpUrl={}, rtspUrl={}",
                 savedCamera.getId(), savedCamera.getName(), savedCamera.getHttpUrl(), savedCamera.getRTSPUrl());
-
         try {
-            // Publish stream
             MediaSource mediaSource = new MediaSource(savedCamera.getIp(), savedCamera.getRTSPUrl());
             streamingClient.publishingSource(mediaSource);
             log.info("Đã publish stream cho camera {}: {}", savedCamera.getId(), savedCamera.getRTSPUrl());
 
-            // Bắt đầu ghi hình cho camera mới
             executorService.submit(() -> {
                 try {
                     log.info("Successfully started recording for new camera id={}", savedCamera.getId());
@@ -112,7 +105,6 @@ public class CameraStreamServiceImpl implements CameraStreamService {
             streamingClient.deletePath(camera.getIp());
         }
 
-        // Cập nhật thông tin camera
         camera.setIp(cameraRequest.getIp());
         camera.setName(cameraRequest.getName());
         camera.setPort(cameraRequest.getPort());
@@ -139,7 +131,7 @@ public class CameraStreamServiceImpl implements CameraStreamService {
 
     @Override
     public List<CameraResponse> getCameraList() {
-        List<Camera> cameras = cameraRepository.findAll();
+        List<Camera> cameras = cameraRepository.findCameraByUserId(getUserId());
         return mapperUtils.convertToResponseList(cameras, CameraResponse.class);
     }
 

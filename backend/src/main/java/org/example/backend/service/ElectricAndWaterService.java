@@ -9,11 +9,11 @@ public interface ElectricAndWaterService {
 
     ElectricAndWater updateElectric(ElectricAndWater electricAndWater, Long id);
 
-//    List<ElectricAndWaterResponse> getElectricByRoom(Long id);
-
     ElectricAndWaterResponse getElectricAndWater(Long id);
 
     Page<ElectricAndWaterResponse> getAllElectricAndWater(String keyword, Integer pageNo, Integer pageSize);
 
     Page<ElectricAndWaterResponse> getElectricAndWaterByFilter(String field, String order, String keyword, Integer pageNo, Integer pageSize);
+
+    void deleteElectricAndWater(Long id);
 }

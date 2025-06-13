@@ -36,17 +36,24 @@ public interface ContractRepository extends JpaRepository<Contract, Long> {
 //                                                     @Param("userId") Long userId,
 //                                                     Pageable pageable);
 
-    @Query(value = "SELECT c FROM Contract c JOIN c.room r " +
-            "WHERE :keyword IS NULL OR :keyword = '' OR " +
-            "LOWER(c.name) LIKE CONCAT('%', LOWER(:keyword), '%') OR " +
-            "LOWER(c.phone) LIKE CONCAT('%', LOWER(:keyword), '%') OR " +
-            "CAST(r.user.id AS string) LIKE CONCAT('%', LOWER(:keyword), '%')",
-            countQuery = "SELECT COUNT(DISTINCT c.id) FROM Contract c JOIN c.room r " +
-                    "WHERE :keyword IS NULL OR :keyword = '' OR " +
-                    "LOWER(c.name) LIKE CONCAT('%', LOWER(:keyword), '%') OR " +
-                    "LOWER(c.phone) LIKE CONCAT('%', LOWER(:keyword), '%') OR " +
-                    "CAST(r.user.id AS string) LIKE CONCAT('%', LOWER(:keyword), '%')")
-    Page<Contract> searchContractsByKeyword(@Param("keyword") String keyword, Pageable pageable);
+    @Query(value = """
+SELECT c FROM Contract c
+JOIN c.room r
+WHERE r.user.id = :userId
+AND (:keyword IS NULL OR :keyword = '' OR
+     LOWER(c.name) LIKE CONCAT('%', LOWER(:keyword), '%') OR
+     LOWER(c.phone) LIKE CONCAT('%', LOWER(:keyword), '%'))
+ORDER BY r.title ASC
+""",
+            countQuery = """
+SELECT COUNT(DISTINCT c.id) FROM Contract c
+JOIN c.room r
+WHERE r.user.id = :userId
+AND (:keyword IS NULL OR :keyword = '' OR
+     LOWER(c.name) LIKE CONCAT('%', LOWER(:keyword), '%') OR
+     LOWER(c.phone) LIKE CONCAT('%', LOWER(:keyword), '%'))
+""")
+    Page<Contract> searchContractsByKeyword(@Param("keyword") String keyword, @Param("userId") Long userId, Pageable pageable);
 
     @Query("SELECT c FROM Contract c JOIN c.room r WHERE 1=1 AND (:userId IS NULL OR r.user.id = :userId)")
     List<Contract> getAllContract(@Param("userId") Long userId);

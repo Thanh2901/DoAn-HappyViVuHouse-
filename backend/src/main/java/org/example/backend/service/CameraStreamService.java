@@ -12,8 +12,6 @@ public interface CameraStreamService {
     CameraResponse updateCamera(CameraRequest cameraRequest, Long id);
     CameraResponse getCamera(Long id);
     String deleteCamera(Long id);
-//    byte[] getCameraFrame(Long cameraId);
-//    void streamCamera(Long cameraId, HttpServletResponse response);
     List<CameraResponse> getCameraList();
     Boolean checkCameraStatus(Long id);
     List<CameraRecord> getRecordsByCamera(Long id);

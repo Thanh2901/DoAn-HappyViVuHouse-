@@ -54,45 +54,8 @@ public class ContractServiceImpl extends BaseService implements ContractService 
     public Page<ContractResponse> getAllContractOfRentaler(String keyword, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.title").ascending());
-        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, getUserId(), pageable), ContractResponse.class, pageable);
     }
-
-//    @Override
-//    public Page<ContractResponse> getAllContractOfRentaler(String keyword, Integer pageNo, Integer pageSize) {
-//        int page = pageNo == 0 ? pageNo : pageNo - 1;
-//        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.status").ascending());
-//
-//        // Fetch contracts from repository
-//        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
-//
-//        // Filter contracts where room.status = 'HIRED'
-//        List<Contract> filteredContracts = contractPage.getContent().stream()
-//                .filter(contract -> RoomStatus.HIRED.equals(contract.getRoom().getStatus()))
-//                .collect(Collectors.toList());
-//
-//        // Create a new Page with filtered results
-//        Page<Contract> filteredPage = new PageImpl<>(
-//                filteredContracts,
-//                pageable,
-//                filteredContracts.size() // Total elements after filtering
-//        );
-//
-//        // Convert to ContractResponse
-//        return mapperUtils.convertToResponsePage(filteredPage, ContractResponse.class, pageable);
-//    }
-
-//    @Override
-//    public Page<ContractResponse> getAllContractOfRentaler(String keyword, Integer pageNo, Integer pageSize) {
-//        int page = pageNo == 0 ? pageNo : pageNo - 1;
-//        // Define sorting by multiple properties
-//        Sort sort = Sort.by(
-//                Sort.Order.asc("room.waterCost"),
-//                Sort.Order.asc("room.publicElectricCost"),
-//                Sort.Order.asc("room.internetCost")
-//        );
-//        Pageable pageable = PageRequest.of(page, pageSize, sort);
-//        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
-//    }
 
     @Override
     public ContractResponse getContractById(Long id) {
@@ -132,14 +95,14 @@ public class ContractServiceImpl extends BaseService implements ContractService 
     public Page<ContractResponse> getAllContractForFilterPriceAsc(String keyword, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.price").ascending());
-        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, getUserId(), pageable), ContractResponse.class, pageable);
     }
 
     @Override
     public Page<ContractResponse> getAllContractForFilterPriceDesc(String keyword, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.price").descending());
-        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable), ContractResponse.class, pageable);
     }
 
     @Override
@@ -152,7 +115,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
                 Sort.Order.asc("room.internetCost")
         );
         Pageable pageable = PageRequest.of(page, pageSize, sort);
-        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, getUserId(),pageable), ContractResponse.class, pageable);
     }
 
     @Override
@@ -165,21 +128,21 @@ public class ContractServiceImpl extends BaseService implements ContractService 
                 Sort.Order.desc("room.internetCost")
         );
         Pageable pageable = PageRequest.of(page, pageSize, sort);
-        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable), ContractResponse.class, pageable);
     }
 
     @Override
     public Page<ContractResponse> getContractByTimeAsc(String keyword, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").ascending());
-        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable), ContractResponse.class, pageable);
     }
 
     @Override
     public Page<ContractResponse> getContractByTimeDesc(String keyword, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").descending());
-        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable), ContractResponse.class, pageable);
     }
 
     @Override
@@ -188,7 +151,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.title").ascending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -212,7 +175,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.title").descending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -236,7 +199,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.price").ascending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -260,7 +223,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.price").descending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -284,7 +247,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.title").ascending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -308,7 +271,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.title").descending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -332,7 +295,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.price").ascending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -356,7 +319,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.price").descending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -380,7 +343,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.title").ascending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -404,7 +367,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.title").descending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -428,7 +391,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.price").ascending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -452,7 +415,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("room.price").descending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -476,7 +439,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").ascending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -500,7 +463,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").descending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -524,7 +487,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").ascending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -548,7 +511,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").descending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -572,7 +535,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").ascending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -596,7 +559,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("deadlineContract").descending());
 
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
 
         // Filter contracts where room.status = 'CHECKED_OUT'
         List<Contract> filteredContracts = contractPage.getContent().stream()
@@ -625,7 +588,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         );
         Pageable pageable = PageRequest.of(page, pageSize, sort);
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
                 .filter(contract -> RoomStatus.HIRED.equals(contract.getRoom().getStatus()))
@@ -651,7 +614,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         );
         Pageable pageable = PageRequest.of(page, pageSize, sort);
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
                 .filter(contract -> RoomStatus.HIRED.equals(contract.getRoom().getStatus()))
@@ -677,7 +640,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         );
         Pageable pageable = PageRequest.of(page, pageSize, sort);
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
                 .filter(contract -> RoomStatus.ROOM_RENT.equals(contract.getRoom().getStatus()))
@@ -703,7 +666,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         );
         Pageable pageable = PageRequest.of(page, pageSize, sort);
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
                 .filter(contract -> RoomStatus.ROOM_RENT.equals(contract.getRoom().getStatus()))
@@ -729,7 +692,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         );
         Pageable pageable = PageRequest.of(page, pageSize, sort);
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
                 .filter(contract -> RoomStatus.CHECKED_OUT.equals(contract.getRoom().getStatus()))
@@ -755,7 +718,7 @@ public class ContractServiceImpl extends BaseService implements ContractService 
         );
         Pageable pageable = PageRequest.of(page, pageSize, sort);
         // Fetch contracts from repository
-        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, pageable);
+        Page<Contract> contractPage = contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable);
         // Filter contracts where room.status = 'HIRED'
         List<Contract> filteredContracts = contractPage.getContent().stream()
                 .filter(contract -> RoomStatus.CHECKED_OUT.equals(contract.getRoom().getStatus()))
@@ -774,13 +737,13 @@ public class ContractServiceImpl extends BaseService implements ContractService 
     public Page<ContractResponse> getContractByNameAsc(String keyword, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("name").ascending());
-        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable), ContractResponse.class, pageable);
     }
 
     @Override
     public Page<ContractResponse> getContractByNameDesc(String keyword, Integer pageNo, Integer pageSize) {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("name").ascending());
-        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, pageable), ContractResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(contractRepository.searchContractsByKeyword(keyword, getUserId() ,pageable), ContractResponse.class, pageable);
     }
 }

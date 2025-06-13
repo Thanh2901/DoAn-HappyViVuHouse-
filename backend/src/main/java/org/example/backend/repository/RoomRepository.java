@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
@@ -83,16 +84,55 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     @Query(value = """
                 SELECT * FROM room r
-                WHERE 1=1 
+                WHERE 1=1
                 AND r.is_locked = 'ENABLE'
                 AND (:userId IS NULL OR r.user_id = :userId)
                 """,
             countQuery = """
                 SELECT COUNT(DISTINCT r.id) FROM room r
-                WHERE 1=1 
+                WHERE 1=1
                 AND r.is_locked = 'ENABLE'
                 AND (:userId IS NULL OR r.user_id = :userId)
                 """,
             nativeQuery = true)
     Page<Room> getAllRentOfHome(@Param("userId") Long userId, Pageable pageable);
+
+    @Query(value = """
+                SELECT * FROM room r
+                WHERE 1=1
+                AND r.is_locked = 'ENABLE'
+                AND (:userId IS NULL OR r.user_id = :userId)
+                AND r.status NOT LIKE 'HIRED'
+                """,
+            countQuery = """
+                SELECT COUNT(DISTINCT r.id) FROM room r
+                WHERE 1=1
+                AND r.is_locked = 'ENABLE'
+                AND (:userId IS NULL OR r.user_id = :userId)
+                AND r.status NOT LIKE 'HIRED'
+                """,
+            nativeQuery = true)
+    Page<Room> getAllRentOfHomeForContract(@Param("userId") Long userId, Pageable pageable);
+
+    @Query(value = """
+                SELECT * FROM room r
+                WHERE 1=1
+                AND r.is_locked = 'ENABLE'
+                AND (:userId IS NULL OR r.user_id = :userId)
+                AND r.status LIKE 'HIRED'
+                """,
+            countQuery = """
+                SELECT COUNT(DISTINCT r.id) FROM room r
+                WHERE 1=1
+                AND r.is_locked = 'ENABLE'
+                AND (:userId IS NULL OR r.user_id = :userId)
+                AND r.status LIKE 'HIRED'
+                """,
+            nativeQuery = true)
+    Page<Room> getAllRentOfHomeForBill(@Param("userId") Long userId, Pageable pageable);
+
+    @Query("select r from Room r where r.title = :title")
+    Optional<Room> findByTitle(String title);
+
+    Optional<Room> findByLatitudeAndLongitude(double latitude, double longitude);
 }

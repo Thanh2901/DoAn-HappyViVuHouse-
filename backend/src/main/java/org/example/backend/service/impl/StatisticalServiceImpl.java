@@ -55,7 +55,6 @@ public class StatisticalServiceImpl extends BaseService implements StatisticalSe
             total += months * (contract.getRoom().getPrice().intValue() + contract.getRoom().getWaterCost().intValue() + contract.getRoom().getPublicElectricCost().intValue() + contract.getRoom().getInternetCost().intValue());
         }
 
-
         TotalNumberRequest totalNumberRequest = new TotalNumberRequest();
         totalNumberRequest.setNumberOfRoom((int) roomRepository.countAllByUser(user));
         totalNumberRequest.setNumberOfEmptyRoom((int) roomRepository.countAllByStatusAndUser(RoomStatus.ROOM_RENT,user) + (int) roomRepository.countAllByStatusAndUser(RoomStatus.CHECKED_OUT,user));
@@ -130,12 +129,12 @@ public class StatisticalServiceImpl extends BaseService implements StatisticalSe
 
         List<CostResponse> costResponses = new ArrayList<>();
         CostResponse costResponse1 = new CostResponse();
-        costResponse1.setName("Doanh thu");
+        costResponse1.setName("Revenue");
         costResponse1.setCost(BigDecimal.valueOf(total));
 
         CostResponse costResponse2 = new CostResponse();
         costResponse2.setCost(maintenanceRepository.sumPriceOfMaintenance(getUserId()));
-        costResponse2.setName("Bảo trì");
+        costResponse2.setName("Maintenance");
 
         costResponses.add(costResponse1);
         costResponses.add(costResponse2);
