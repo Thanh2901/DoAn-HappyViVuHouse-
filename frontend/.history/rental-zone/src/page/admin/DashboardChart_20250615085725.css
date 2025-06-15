@@ -1,0 +1,48 @@
+/* Add these CSS rules to your CSS file or in a <style> tag */
+
+/* Chart container styling */
+.chart-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.chart-container .card-body {
+  padding: 1rem;
+}
+
+/* Chart canvas styling */
+.chart-canvas {
+  max-width: 100% !important;
+  max-height: 300px !important;
+  height: 300px !important;
+  width: 100% !important;
+}
+
+/* Responsive chart containers */
+.chart-container .row {
+  margin: 0;
+}
+
+.chart-container .col-md-6 {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-container h6 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* Optional: Add responsive behavior for smaller screens */
+@media (max-width: 768px) {
+  .chart-canvas {
+    height: 250px !important;
+  }
+  
+  .chart-container .col-md-6 {
+    margin-bottom: 2rem;
+  }
+}

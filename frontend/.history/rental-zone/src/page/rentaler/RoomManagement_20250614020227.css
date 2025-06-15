@@ -1,0 +1,7 @@
+.modal {
+    z-index: 1050 !important;
+}
+
+.dropdown-menu {
+  min-width: 150px;
+}

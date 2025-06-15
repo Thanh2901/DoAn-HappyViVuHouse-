@@ -16,6 +16,7 @@ public class RoomResponse {
     private Double longitude;
     private String address;
     private String status;
+    private String roomType;
     private String isLocked;
     private String isApprove;
     private Boolean isRemove;

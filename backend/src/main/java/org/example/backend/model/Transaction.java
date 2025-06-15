@@ -2,11 +2,13 @@ package org.example.backend.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.example.backend.enums.TransactionStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "transaction")
 @Data

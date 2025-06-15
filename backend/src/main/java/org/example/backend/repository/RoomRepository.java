@@ -29,23 +29,24 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     // custom repository
     @Query(value = """
-    SELECT * FROM room r
-    WHERE 1=1 
+    SELECT r FROM Room r
+    WHERE 1=1
     AND (:title IS NULL OR r.title LIKE CONCAT('%', :title, '%'))
-    AND (:userId IS NULL OR r.user_id = :userId)
+    AND (:userId IS NULL OR r.user.id = :userId)
+    ORDER BY CASE WHEN r.type = 'VIP' THEN 0 ELSE 1 END, r.id DESC
     """,
             countQuery = """
-    SELECT COUNT(DISTINCT r.id) FROM room r
+    SELECT COUNT(DISTINCT r.id) FROM Room r
     WHERE (:title IS NULL OR r.title LIKE CONCAT('%', :title, '%'))
-    AND (:userId IS NULL OR r.user_id = :userId)
-    """,
-            nativeQuery = true)
+    AND (:userId IS NULL OR r.user.id = :userId)
+    """)
     Page<Room> searchingRoom(@Param("title") String title, @Param("userId") Long userId, Pageable pageable);
 
     @Query(value = """
     SELECT * FROM room r
     WHERE (:title IS NULL OR :title = '' OR LOWER(r.title) LIKE CONCAT('%', LOWER(:title), '%'))
     AND (CAST(:approve AS BOOLEAN) IS NULL OR r.is_approve = :approve)
+    ORDER BY CASE WHEN r.type = 'VIP' THEN 0 ELSE 1 END, r.id DESC
     """,
             countQuery = """
     SELECT COUNT(DISTINCT r.id) FROM room r
@@ -58,20 +59,20 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     @Query(value = "SELECT r.* FROM room r " +
             "WHERE 1=1 " +
-            "AND (:title IS NULL OR :title = '' OR r.title LIKE :title) " +
+            "AND (:title IS NULL OR :title = '' OR r.title LIKE CONCAT('%', :title, '%')) " + // Sửa LIKE để phù hợp với native query
             "AND (CAST(:price AS numeric) IS NULL OR r.price = :price) " +
             "AND (CAST(:categoryId AS bigint) IS NULL OR CAST(:categoryId AS bigint) = 0 OR r.category_id = :categoryId) " +
-            "AND (CAST(:userId AS bigint) IS NULL OR r.user_id = :userId) " + // Thêm CAST ở đây
+            "AND (CAST(:userId AS bigint) IS NULL OR r.user_id = :userId) " +
             "AND r.is_approve = true " +
             "AND r.is_locked = 'ENABLE' " +
             "AND r.is_remove = false " +
-            "ORDER BY r.id DESC",
+            "ORDER BY CASE WHEN r.type = 'VIP' THEN 0 ELSE 1 END, r.id DESC",
             countQuery = "SELECT COUNT(DISTINCT r.id) FROM room r " +
                     "WHERE 1=1 " +
-                    "AND (:title IS NULL OR :title = '' OR r.title LIKE :title) " +
+                    "AND (:title IS NULL OR :title = '' OR r.title LIKE CONCAT('%', :title, '%')) " + // Sửa LIKE
                     "AND (CAST(:price AS numeric) IS NULL OR r.price = :price) " +
                     "AND (CAST(:categoryId AS bigint) IS NULL OR CAST(:categoryId AS bigint) = 0 OR r.category_id = :categoryId) " +
-                    "AND (CAST(:userId AS bigint) IS NULL OR r.user_id = :userId) " + // Thêm CAST ở đây
+                    "AND (CAST(:userId AS bigint) IS NULL OR r.user_id = :userId) " +
                     "AND r.is_approve = true " +
                     "AND r.is_locked = 'ENABLE' " +
                     "AND r.is_remove = false",
@@ -98,20 +99,21 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     Page<Room> getAllRentOfHome(@Param("userId") Long userId, Pageable pageable);
 
     @Query(value = """
-                SELECT * FROM room r
-                WHERE 1=1
-                AND r.is_locked = 'ENABLE'
-                AND (:userId IS NULL OR r.user_id = :userId)
-                AND r.status NOT LIKE 'HIRED'
-                """,
+        SELECT r FROM Room r
+        WHERE 1=1
+        AND r.isLocked = 'ENABLE'
+        AND (:userId IS NULL OR r.user.id = :userId)
+        AND r.status != 'HIRED'
+        AND r.isApprove = true
+        """,
             countQuery = """
-                SELECT COUNT(DISTINCT r.id) FROM room r
-                WHERE 1=1
-                AND r.is_locked = 'ENABLE'
-                AND (:userId IS NULL OR r.user_id = :userId)
-                AND r.status NOT LIKE 'HIRED'
-                """,
-            nativeQuery = true)
+        SELECT COUNT(DISTINCT r.id) FROM Room r
+        WHERE 1=1
+        AND r.isLocked = 'ENABLE'
+        AND (:userId IS NULL OR r.user.id = :userId)
+        AND r.status != 'HIRED'
+        AND r.isApprove = true
+        """)
     Page<Room> getAllRentOfHomeForContract(@Param("userId") Long userId, Pageable pageable);
 
     @Query(value = """

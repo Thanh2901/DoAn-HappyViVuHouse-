@@ -10,6 +10,7 @@ import org.example.backend.enums.RoomType;
 import java.math.BigDecimal;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "room")
 @Data
@@ -87,7 +88,7 @@ public class Room extends AbstractEntity<Long> {
 
     private BigDecimal internetCost = BigDecimal.ZERO;
 
-    public Room(String title, String description, BigDecimal price, Double latitude, Double longitude, String address, String username, String username1, Location location, Category category, User user, RoomStatus status, BigDecimal waterCost, BigDecimal publicElectricCost, BigDecimal internetCost) {
+    public Room(String title, String description, BigDecimal price, Double latitude, Double longitude, String address, String username, String username1, Location location, Category category, User user, RoomStatus status, RoomType type, BigDecimal waterCost, BigDecimal publicElectricCost, BigDecimal internetCost) {
         super(username, username1);
         this.title = title;
         this.description = description;
@@ -99,6 +100,7 @@ public class Room extends AbstractEntity<Long> {
         this.category = category;
         this.user = user;
         this.status = status;
+        this.type = type; // Khởi tạo loại tin
         this.waterCost = waterCost;
         this.publicElectricCost = publicElectricCost;
         this.internetCost = internetCost;

@@ -1,5 +1,8 @@
 package org.example.backend.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum LockedStatus {
     ENABLE("ENABLE"),
     DISABLE("DISABLE");
@@ -10,7 +13,4 @@ public enum LockedStatus {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
 }

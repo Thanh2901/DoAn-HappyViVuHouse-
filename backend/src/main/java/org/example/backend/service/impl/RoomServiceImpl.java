@@ -8,8 +8,7 @@ import org.example.backend.dto.request.AssetRequest;
 import org.example.backend.dto.request.RoomRequest;
 import org.example.backend.dto.response.MessageResponse;
 import org.example.backend.dto.response.RoomResponse;
-import org.example.backend.enums.LockedStatus;
-import org.example.backend.enums.RoomStatus;
+import org.example.backend.enums.*;
 import org.example.backend.exception.BadRequestException;
 import org.example.backend.model.*;
 import org.example.backend.repository.*;
@@ -24,9 +23,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,12 +42,14 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     private final CategoryRepository categoryRepository;
     private final AssetRepository assetRepository;
     private final CommentRepository commentRepository;
+    private final ConfigurationRepository configurationRepository;
+    private final TransactionRepository transactionRepository;
     private final MapperUtils mapperUtils;
 
     @Override
     public MessageResponse addNewRoom(RoomRequest roomRequest) {
         Optional<Room> existedRoom = roomRepository.findByLatitudeAndLongitude(roomRequest.getLatitude(), roomRequest.getLongitude());
-        if (existedRoom.isPresent()) {
+        if (existedRoom.isPresent() && existedRoom.get().getTitle().equals(roomRequest.getTitle()) && existedRoom.get().getUser() == getUser()) {
             throw new BadRequestException("Room already exists");
         }
 
@@ -68,28 +71,61 @@ public class RoomServiceImpl extends BaseService implements RoomService {
                 category,
                 getUser(),
                 roomRequest.getStatus(),
+                roomRequest.getRoomType(),
                 roomRequest.getWaterCost(),
                 roomRequest.getPublicElectricCost(),
                 roomRequest.getInternetCost());
 
-        roomRepository.save(room);
+        Room savedRoom = roomRepository.save(room);
 
-        for (MultipartFile file : roomRequest.getFiles()) {
-            String fileName = fileStorageService.storeFile(file);
-            RoomMedia roomMedia = new RoomMedia();
-            roomMedia.setFiles(fileName);
-            roomMedia.setRoom(room);
-            roomMediaRepository.save(roomMedia);
+        // Lấy phí từ Configuration
+        BigDecimal totalAmount;
+        BigDecimal adminFee;
+        String postingFeeKey = room.getType() == RoomType.VIP ? "VIP_POSTING_FEE" : "REGULAR_POSTING_FEE";
+        String adminFeeKey = room.getType() == RoomType.VIP ? "VIP_ADMIN_FEE" : "REGULAR_ADMIN_FEE";
+
+        Optional<Configuration> postingFeeConfig = configurationRepository
+                .findByKey(postingFeeKey);
+        if(postingFeeConfig.isEmpty()) throw new BadRequestException("Posting fee not exists");
+        Optional<Configuration> adminFeeConfig = configurationRepository
+                .findByKey(adminFeeKey);
+        if(adminFeeConfig.isEmpty()) throw new BadRequestException("Admin fee not exists");
+
+        totalAmount = new BigDecimal(postingFeeConfig.get().getValue());
+        adminFee = new BigDecimal(adminFeeConfig.get().getValue());
+
+        // Tạo Transaction
+        Transaction transaction = new Transaction();
+        transaction.setUser(getUser());
+        transaction.setRoom(savedRoom);
+        transaction.setTotalAmount(totalAmount);
+        transaction.setAdminFee(adminFee);
+        transaction.setStatus(TransactionStatus.PENDING);
+        transactionRepository.save(transaction);
+
+        // Lưu RoomMedia
+        if (Objects.nonNull(roomRequest.getFiles()) && !roomRequest.getFiles().isEmpty()) {
+            for (MultipartFile file : roomRequest.getFiles()) {
+                String fileName = fileStorageService.storeFile(file);
+                RoomMedia roomMedia = new RoomMedia();
+                roomMedia.setFiles(fileName);
+                roomMedia.setRoom(savedRoom);
+                roomMediaRepository.save(roomMedia);
+            }
         }
 
-        for (AssetRequest asset : roomRequest.getAssets()) {
-            Asset a = new Asset();
-            a.setRoom(room);
-            a.setName(asset.getName());
-            a.setNumber(asset.getNumber());
-            assetRepository.save(a);
+        // Lưu Assets
+        if (Objects.nonNull(roomRequest.getAssets()) && !roomRequest.getAssets().isEmpty()) {
+            for (AssetRequest asset : roomRequest.getAssets()) {
+                Asset a = new Asset();
+                a.setRoom(savedRoom);
+                a.setName(asset.getName());
+                a.setNumber(asset.getNumber());
+                assetRepository.save(a);
+            }
         }
-        return MessageResponse.builder().message("Room added successfully").build();
+
+        return MessageResponse.builder().message("Room added successfully, awaiting approval").build();
     }
 
     // default sort
@@ -98,7 +134,7 @@ public class RoomServiceImpl extends BaseService implements RoomService {
         int page = pageNo == 0 ? pageNo : pageNo - 1;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("title").ascending());
         Page<RoomResponse> result = mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
-        return mapperUtils.convertToResponsePage(roomRepository.searchingRoom(title, getUserId(), pageable), RoomResponse.class, pageable);
+        return mapperUtils.convertToResponsePage(result, RoomResponse.class, pageable);
     }
 
     @Override
@@ -125,10 +161,11 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     @Transactional
     public MessageResponse updateRoomInfo(Long id, RoomRequest roomRequest) {
         Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Room information does not exist."));
-        Location location = locationRepository.
-                findById(roomRequest.getLocationId()).orElseThrow(() -> new BadRequestException("City does not exist."));
+        Location location = locationRepository.findById(roomRequest.getLocationId())
+                .orElseThrow(() -> new BadRequestException("City does not exist."));
         Category category = categoryRepository.findById(roomRequest.getCategoryId())
                 .orElseThrow(() -> new BadRequestException("Category does not exist"));
+
         room.setUpdatedBy(getUsername());
         room.setTitle(roomRequest.getTitle());
         room.setDescription(roomRequest.getDescription());
@@ -136,35 +173,118 @@ public class RoomServiceImpl extends BaseService implements RoomService {
         room.setLatitude(roomRequest.getLatitude());
         room.setLongitude(roomRequest.getLongitude());
         room.setAddress(roomRequest.getAddress());
-        room.setUpdatedBy(getUsername());
         room.setLocation(location);
         room.setCategory(category);
         room.setStatus(roomRequest.getStatus());
         room.setWaterCost(roomRequest.getWaterCost());
         room.setPublicElectricCost(roomRequest.getPublicElectricCost());
         room.setInternetCost(roomRequest.getInternetCost());
-        roomRepository.save(room);
 
-        if (Objects.nonNull(roomRequest.getFiles())) {
-            roomMediaRepository.deleteAllByRoom(room);
-            for (MultipartFile file : roomRequest.getFiles()) {
-                String fileName = fileStorageService.storeFile(file);
-                RoomMedia roomMedia = new RoomMedia();
-                roomMedia.setFiles(fileName);
-                roomMedia.setRoom(room);
-                roomMediaRepository.save(roomMedia);
+        // Kiểm tra và cập nhật roomType chỉ cho ADMIN
+        RoomType newRoomType = roomRequest.getRoomType();
+        if (newRoomType != null) { // Chỉ kiểm tra nếu roomType được gửi lên
+            if (room.getType() == null || !room.getType().equals(newRoomType)) {
+                User currentUser = getUser();
+                log.info("Current user roles: {}", currentUser.getRoles().stream().map(Role::getName).collect(Collectors.toList()));
+                boolean isAdmin = currentUser.getRoles().stream()
+                        .anyMatch(role -> role.getName().equals(RoleName.ROLE_ADMIN));
+                log.info("Is admin: {}", isAdmin);
+                if (!isAdmin) {
+                    throw new BadRequestException("You don't have permission to update the room type");
+                }
+                room.setType(newRoomType);
+                updateTransactionForRoomTypeChange(room);
             }
+        } else {
+            // Nếu không gửi roomType, giữ nguyên giá trị cũ
+            room.setType(room.getType()); // Không thay đổi nếu không cung cấp
         }
 
-        assetRepository.deleteAllByRoom(room);
-        for (AssetRequest asset : roomRequest.getAssets()) {
-            Asset a = new Asset();
-            a.setRoom(room);
-            a.setName(asset.getName());
-            a.setNumber(asset.getNumber());
-            assetRepository.save(a);
+        log.info("Updating room (ID: {}) with roomType: {}", id, roomRequest.getRoomType());
+
+        try {
+            roomRepository.save(room);
+            log.info("Room (ID: {}) updated successfully with roomType: {}", id, room.getType());
+
+            // Xử lý roomMedia
+            if (Objects.nonNull(roomRequest.getFiles()) && !roomRequest.getFiles().isEmpty()) {
+                roomMediaRepository.deleteAllByRoom(room);
+                for (MultipartFile file : roomRequest.getFiles()) {
+                    String fileName = fileStorageService.storeFile(file);
+                    RoomMedia roomMedia = new RoomMedia();
+                    roomMedia.setFiles(fileName);
+                    roomMedia.setRoom(room);
+                    roomMediaRepository.save(roomMedia);
+                }
+            } else if (roomRequest.getExistingMedia() != null && !roomRequest.getExistingMedia().isEmpty()) {
+                List<String> existingFileNames = roomRequest.getExistingMedia();
+                List<RoomMedia> currentMedia = roomMediaRepository.findAllByRoom(room);
+                List<String> currentFileNames = currentMedia.stream().map(RoomMedia::getFiles).toList();
+
+                currentMedia.forEach(media -> {
+                    if (!existingFileNames.contains(media.getFiles())) {
+                        roomMediaRepository.delete(media);
+                    }
+                });
+
+                for (String fileName : existingFileNames) {
+                    if (!currentFileNames.contains(fileName)) {
+                        RoomMedia roomMedia = new RoomMedia();
+                        roomMedia.setFiles(fileName);
+                        roomMedia.setRoom(room);
+                        roomMediaRepository.save(roomMedia);
+                    }
+                }
+            }
+
+            assetRepository.deleteAllByRoom(room);
+            if (Objects.nonNull(roomRequest.getAssets()) && !roomRequest.getAssets().isEmpty()) {
+                for (AssetRequest asset : roomRequest.getAssets()) {
+                    Asset a = new Asset();
+                    a.setRoom(room);
+                    a.setName(asset.getName());
+                    a.setNumber(asset.getNumber());
+                    assetRepository.save(a);
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error updating room (ID: {}): {}", id, e.getMessage());
+            throw new BadRequestException("Failed to update room: " + e.getMessage());
         }
+
         return MessageResponse.builder().message("Room information updated successfully").build();
+    }
+
+    // Phương thức mới để xử lý thay đổi roomType và tạo transaction
+    private void updateTransactionForRoomTypeChange(Room room) {
+        String postingFeeKey = room.getType() == RoomType.VIP ? "VIP_POSTING_FEE" : "REGULAR_POSTING_FEE";
+        String adminFeeKey = room.getType() == RoomType.VIP ? "VIP_ADMIN_FEE" : "REGULAR_ADMIN_FEE";
+
+        Optional<Configuration> postingFeeConfig = configurationRepository.findByKey(postingFeeKey);
+        if (postingFeeConfig.isEmpty()) throw new BadRequestException("Posting fee not exists");
+        Optional<Configuration> adminFeeConfig = configurationRepository.findByKey(adminFeeKey);
+        if (adminFeeConfig.isEmpty()) throw new BadRequestException("Admin fee not exists");
+
+        BigDecimal totalAmount = new BigDecimal(postingFeeConfig.get().getValue());
+        BigDecimal adminFee = new BigDecimal(adminFeeConfig.get().getValue());
+
+            // Tạo transaction mới với trạng thái PENDING
+            log.info("room id " + room.getId());
+            Optional<Transaction> transaction = transactionRepository.getPendingTransactionByRoomId(room.getId());
+            if (transaction.isEmpty()) {
+                throw new BadRequestException("Transaction does not exist");
+            }
+            transaction.get().setUser(getUser());
+            transaction.get().setRoom(room);
+            transaction.get().setTotalAmount(totalAmount);
+            transaction.get().setAdminFee(adminFee);
+            transaction.get().setStatus(TransactionStatus.PENDING);
+            transactionRepository.save(transaction.get());
+
+            room.setIsApprove(Boolean.FALSE);
+            roomRepository.save(room);
+
+        log.info("New transaction created for room (ID: {}) with roomType: {} and totalAmount: {}", room.getId(), room.getType(), totalAmount);
     }
 
     @Override
@@ -184,13 +304,52 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     @Override
     public MessageResponse isApproveRoom(Long id) {
         Room room = roomRepository.findById(id).orElseThrow(() -> new BadRequestException("Room does not exist"));
+        Optional<Transaction> transaction = transactionRepository.getPendingTransactionByRoomId(id);
+        if (transaction.isEmpty()) {
+            throw new BadRequestException("Transaction does not exist");
+        }
         if (room.getIsApprove().equals(Boolean.TRUE)) {
             throw new BadRequestException("Room has already been approved");
-        } else {
-            room.setIsApprove(Boolean.TRUE);
         }
+
+        // Cập nhật trạng thái Room
+        room.setIsApprove(true);
         roomRepository.save(room);
+
+        transaction.get().setStatus(TransactionStatus.SUCCESS);
+        transactionRepository.save(transaction.get());
+
         return MessageResponse.builder().message("Room approved successfully.").build();
+    }
+
+    @Transactional
+    public MessageResponse completeTransaction(Long transactionId) {
+        Transaction transaction = transactionRepository.findById(transactionId)
+                .orElseThrow(() -> new BadRequestException("Transaction does not exist"));
+        if (transaction.getStatus() == TransactionStatus.SUCCESS) {
+            throw new BadRequestException("Transaction has already been completed");
+        }
+        if (transaction.getStatus() == TransactionStatus.FAILED) {
+            throw new BadRequestException("Cannot complete a failed transaction");
+        }
+
+        // Cập nhật trạng thái giao dịch
+        transaction.setStatus(TransactionStatus.SUCCESS);
+        transactionRepository.save(transaction);
+
+        return MessageResponse.builder().message("Transaction completed successfully").build();
+    }
+
+    @Transactional
+    public MessageResponse failTransaction(Long transactionId) {
+        Transaction transaction = transactionRepository.findById(transactionId)
+                .orElseThrow(() -> new BadRequestException("Transaction does not exist"));
+        if (transaction.getStatus() != TransactionStatus.PENDING) {
+            throw new BadRequestException("Transaction is not in pending state");
+        }
+        transaction.setStatus(TransactionStatus.FAILED);
+        transactionRepository.save(transaction);
+        return MessageResponse.builder().message("Transaction marked as failed").build();
     }
 
     @Override
@@ -223,8 +382,11 @@ public class RoomServiceImpl extends BaseService implements RoomService {
 
     @Override
     public List<CommentDTO> getAllCommentRoom(Long id) {
-        Room room = roomRepository.findById(id).get();
-        return mapperUtils.convertToEntityList(room.getComments(), CommentDTO.class);
+        Optional<Room> room = roomRepository.findById(id);
+        if (room.isEmpty()) {
+            throw new BadRequestException("Room does not exist");
+        }
+        return mapperUtils.convertToEntityList(room.get().getComments(), CommentDTO.class);
     }
 
     @Override

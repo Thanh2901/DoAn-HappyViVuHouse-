@@ -1,10 +1,14 @@
 package org.example.backend.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.dto.CommentDTO;
 import org.example.backend.dto.request.AssetRequest;
 import org.example.backend.dto.request.RoomRequest;
 import org.example.backend.enums.RoomStatus;
+import org.example.backend.enums.RoomType;
 import org.example.backend.security.CurrentUser;
 import org.example.backend.security.UserPrincipal;
 import org.example.backend.service.RoomService;
@@ -135,7 +139,7 @@ public class RoomController {
         }
 
         String latitudeStr = request.getParameter("latitude");
-        Double latitude;
+        double latitude;
         try {
             latitude = (latitudeStr != null && !latitudeStr.trim().isEmpty()) ? Double.parseDouble(latitudeStr) : 0.0;
         } catch (NumberFormatException e) {
@@ -143,7 +147,7 @@ public class RoomController {
         }
 
         String longitudeStr = request.getParameter("longitude");
-        Double longitude;
+        double longitude;
         try {
             longitude = (longitudeStr != null && !longitudeStr.trim().isEmpty()) ? Double.parseDouble(longitudeStr) : 0.0;
         } catch (NumberFormatException e) {
@@ -224,10 +228,38 @@ public class RoomController {
             throw new IllegalArgumentException("Invalid room status value: " + statusParam);
         }
 
+        // Xử lý RoomType
+        String typeParam = request.getParameter("type");
+        RoomType type;
+        try {
+            type = (typeParam != null && !typeParam.trim().isEmpty())
+                    ? RoomType.valueOf(typeParam)
+                    : RoomType.REGULAR; // Mặc định là REGULAR
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid room type value: " + typeParam);
+        }
+
         List<MultipartFile> files = request.getFiles("files");
 
+        // Parse existingMedia from JSON string
+        String existingMediaJson = request.getParameter("existingMedia");
+        List<String> existingMedia = null;
+        if (existingMediaJson != null && !existingMediaJson.trim().isEmpty()) {
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                existingMedia = objectMapper.readValue(existingMediaJson, new TypeReference<List<String>>() {});
+            } catch (JsonProcessingException e) {
+                throw new IllegalArgumentException("Invalid existingMedia format: " + e.getMessage());
+            }
+        }
+
         return new RoomRequest(title, description, price, latitude, longitude, address, locationId, categoryId,
-                status, assets, files, waterCost, publicElectricCost, internetCost);
+                status, type, assets, files, waterCost, publicElectricCost, internetCost, existingMedia);
+    }
+
+    @PostMapping("/transactions/{transactionId}/complete")
+    public ResponseEntity<?> completeTransaction(@PathVariable Long transactionId) {
+        return ResponseEntity.ok(roomService.completeTransaction(transactionId));
     }
 
     // room order by price desc

@@ -1,9 +1,11 @@
 package org.example.backend.dto.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.backend.enums.RoomStatus;
+import org.example.backend.enums.RoomType;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
@@ -31,6 +33,9 @@ public class RoomRequest {
 
     private RoomStatus status;
 
+    @NotNull(message = "Room type is required")
+    private RoomType roomType;
+
     private List<AssetRequest> assets;
 
     private List<MultipartFile> files;
@@ -38,4 +43,6 @@ public class RoomRequest {
     private BigDecimal waterCost = BigDecimal.ZERO;
     private BigDecimal publicElectricCost = BigDecimal.ZERO;
     private BigDecimal internetCost = BigDecimal.ZERO;
+
+    private List<String> existingMedia;
 }

@@ -1,0 +1,4 @@
+.chart-canvas {
+  min-height: 100px!important;
+  max-height: 300px!important;
+}

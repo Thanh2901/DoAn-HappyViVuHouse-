@@ -5,58 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a16e0f2-828e-4899-bc35-7a2d60ddf86f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/CsvExportService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CsvExportServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4/storage_v2/_src_/database/rental-house.N-0RUg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a5d88cd3-7dd5-4a95-83e2-cafb4bcf0ce4/storage_v2/_src_/database/rental-house.N-0RUg/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/BackendApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/EmailConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/EmailConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/config/WebSocketConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/AccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ElectricAndWaterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/ElectricAndWaterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/MessageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/controller/RoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/CameraRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/CameraRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/MessageChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/MessageChat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/request/RoomRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/request/RoomRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/response/RoomResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/dto/response/RoomResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/enums/LockedStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/enums/LockedStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/RoomMedia.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/RoomMedia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/CameraRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/CameraRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/ContractRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/ContractRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/ElectricAndWaterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/ElectricAndWaterRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/model/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/RoomMediaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/RoomMediaRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/RoomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/RoomRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/CameraStreamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/CameraStreamService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ElectricAndWaterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/ElectricAndWaterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/FileStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/FileStorageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/repository/TransactionRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/RoomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/RoomService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/UploadMinIOService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/UploadMinIOService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/AccountServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraRecordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraRecordServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraStreamServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/CameraStreamServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ContractServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ContractServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ElectricAndWaterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/ElectricAndWaterServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/RoomServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/RoomServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/StatisticalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/StatisticalServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/UploadMinIOServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/backend/service/impl/UploadMinIOServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/confirm-email.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/confirm-email.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V2__alter_user(name)_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V2__alter_user(name)_table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatbot/chrone_lanagchain_db/68891f75-5728-4a8f-a7a7-7bb98a166de6/data_level0.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatbot/chrone_lanagchain_db/68891f75-5728-4a8f-a7a7-7bb98a166de6/header.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatbot/chrone_lanagchain_db/68891f75-5728-4a8f-a7a7-7bb98a166de6/length.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatbot/chrone_lanagchain_db/68891f75-5728-4a8f-a7a7-7bb98a166de6/link_lists.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatbot/chrone_lanagchain_db/chroma.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatbot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatbot/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatbot/realistic_restaurant_reviews.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatbot/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/chatbot/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatbot/vector.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatbot/vector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot/chroma_langchain_db/chroma.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/chatbot/chroma_langchain_db/chroma.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot/output.csv" beforeDir="false" afterPath="$PROJECT_DIR$/chatbot/output.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,8 +32,8 @@
       <list>
         <option value="package-info" />
         <option value="JavaScript File" />
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -126,7 +90,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Spring Boot.BackendApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;thanhvp&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;22&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/DACNTT/Source Code/Happi ViVu House&quot;,
@@ -387,7 +351,9 @@
       <workItem from="1749605998204" duration="12327000" />
       <workItem from="1749697355459" duration="9545000" />
       <workItem from="1749741102998" duration="4322000" />
-      <workItem from="1749778550912" duration="4251000" />
+      <workItem from="1749778550912" duration="24703000" />
+      <workItem from="1749864729953" duration="25109000" />
+      <workItem from="1749951669143" duration="3965000" />
     </task>
     <servers />
   </component>
